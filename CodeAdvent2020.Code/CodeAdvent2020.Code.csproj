@@ -5,4 +5,17 @@
     <LangVersion>9</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="InputFiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="InputFiles\Day1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="InputFiles\Day2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
