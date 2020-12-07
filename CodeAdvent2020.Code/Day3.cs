@@ -10,21 +10,7 @@ namespace CodeAdvent2020.Code
     public class Day3
     {
         public static List<string> GetInputs() => File.ReadAllLines("InputFiles/Day3.txt").ToList();
-        private static string inputTest = @"..##.......
-#...#...#..
-.#....#..#.
-..#.#...#.#
-.#...##..#.
-..#.##.....
-.#.#.#....#
-.#........#
-#.##...#...
-#...##....#
-.#..#...#.#";
-
-
         public static int Part1() => GetTreesCount(new Slope(3, 1));
-
 
         public static long Part2()
         {
@@ -50,8 +36,11 @@ namespace CodeAdvent2020.Code
             for (int i = slope.yDisplacement; i < inputs.Count; i += slope.yDisplacement)
             {
                 if (inputs[i][x] == '#') treesCount++;
+
                 x += slope.xDisplacement;
                 if (x > patternLength - 1) x -= patternLength;
+                // good alternative for the previous two lines:
+                // x = (x+slope.xDisplacement)%patternLength;
             }
             return treesCount;
         }
