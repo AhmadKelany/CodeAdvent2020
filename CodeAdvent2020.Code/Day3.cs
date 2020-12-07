@@ -36,7 +36,6 @@ namespace CodeAdvent2020.Code
                 new Slope(1,2)
             };
             long result = slopes.Select(s => (long)GetTreesCount(s)).Aggregate((x, y) => x * y);
-
             return result;
         }
 
@@ -44,23 +43,11 @@ namespace CodeAdvent2020.Code
         public record Slope(int xDisplacement, int yDisplacement);
         private static int GetTreesCount(Slope slope)
         {
-            var input = @"..##.......
-#...#...#..
-.#....#..#.
-..#.#...#.#
-.#...##..#.
-..#.##.....
-.#.#.#....#
-.#........#
-#.##...#...
-#...##....#
-.#..#...#.#".Split(Environment.NewLine).ToList();
             int x = slope.xDisplacement;
             int treesCount = 0;
-            //var inputs = input;
             var inputs = GetInputs();
             int patternLength = inputs[0].Length;
-            for (int i = 1; i < inputs.Count; i += slope.yDisplacement)
+            for (int i = slope.yDisplacement; i < inputs.Count; i += slope.yDisplacement)
             {
                 if (inputs[i][x] == '#') treesCount++;
                 x += slope.xDisplacement;
