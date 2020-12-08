@@ -54,8 +54,9 @@ namespace CodeAdvent2020.Code
 
         }
 
-        public record Rule(string Title, bool IsNumeric ,int Min , int Max , string Regex);
-        public static List<Rule> Rules {
+        public record Rule(string Title, bool IsNumeric, int Min, int Max, string Regex);
+        public static List<Rule> Rules
+        {
             get
             {
                 return new List<Rule>() {
@@ -68,6 +69,6 @@ namespace CodeAdvent2020.Code
                     new Rule("pid" , false , 0 , 0 , @"^\d{9}$")
                 };
             }
-                }
+        }
     }
 }
