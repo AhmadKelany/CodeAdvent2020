@@ -13,13 +13,19 @@ namespace CodeAdvent2020.Tests
         [Fact]
         public void InputsValid()
         {
-            var inputs = Day4.GetInputs();
+            var inputs = Day4.GetPassports();
             Assert.True(inputs.Any());
         }
         [Fact]
         public void Part1()
         {
             var result = Day4.Part1();
+            Assert.True(result > 0);
+        }
+        [Fact]
+        public void Part2()
+        {
+            var result = Day4.Part2();
             Assert.True(result > 0);
         }
 
