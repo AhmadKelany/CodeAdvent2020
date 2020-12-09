@@ -14,6 +14,7 @@ namespace CodeAdvent2020.Code
         public static int Part1() => GetPassports().Count(Part1IsValid);
 
 
+
         public static int Part2() => GetPassports().
             Count(p => Part1IsValid(p) && GetKeyValuePairs(p).All(Part2IsValid));
 
