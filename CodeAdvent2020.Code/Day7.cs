@@ -22,6 +22,7 @@ namespace CodeAdvent2020.Code
         }
 
 
+
         public static int Part1()
         {
             var containedColors = new List<string> { "shiny gold" };
@@ -31,7 +32,7 @@ namespace CodeAdvent2020.Code
             {
                 containedColors = GetColorsContaining(containedColors);
                 totalContainingColors.AddRange(containedColors);
-                foundIterationCount = containedColors.Count();
+                foundIterationCount = containedColors.Count;
             } while (foundIterationCount > 0);
 
             return totalContainingColors.Distinct().Count();
