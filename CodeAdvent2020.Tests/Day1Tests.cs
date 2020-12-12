@@ -1,5 +1,4 @@
 using CodeAdvent2020.Code;
-using System;
 using System.Linq;
 using Xunit;
 

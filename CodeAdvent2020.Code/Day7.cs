@@ -1,56 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace CodeAdvent2020.Code
 {
     public class Day7
     {
+        public record BagContent(string Color, int Count);
+        public record Bag(string Color, List<BagContent> Contents);
+        private static List<Bag> Bags = new List<Bag>();
+
         public static List<string> GetRules() => File.ReadAllLines("InputFiles/Day7.txt").ToList();
         public static List<string> GetBagColors() => GetRules().Select(s => s.Substring(0, s.IndexOf("bags")-1)).ToList();
-
-        public static List<string> GetColorsContaining(List<string> containedColors)
-        {
-            var result = GetRules().
-                Where(s =>  containedColors.Any(c => s.Contains(c) && !s.StartsWith(c))).
-                Select(s => s.Substring(0, s.IndexOf("bags") - 1)).ToList();
-
-            return result;
-        }
-
-        public static List<string> GetContainedColors(List<string> containingColors)
-        {
-            var result = Bags.
-                Where(b => containingColors.Contains(b.Color)).
-                SelectMany(b => b.Contents.Select(c => c.Color)).ToList();
-
-            return result;
-
-        }
-
-        public record BagContent(string Color , int Count);
-        public record Bag(string Color,List<BagContent> Contents);
-        private static List<Bag> Bags = new List<Bag>();
-        public static int Part1()
-        {
-            var containedColors = new List<string> { "shiny gold" };
-            int foundIterationCount = 0;
-            var totalContainingColors = new List<string>();
-            do
-            {
-                containedColors = GetColorsContaining(containedColors);
-                totalContainingColors.AddRange(containedColors);
-                foundIterationCount = containedColors.Count;
-            } while (foundIterationCount > 0);
-
-            return totalContainingColors.Distinct().Count();
-
-        }
-
         public static void PopulateBags()
         {
             var rules = GetRules();
@@ -73,6 +35,15 @@ namespace CodeAdvent2020.Code
             Bags = result;
         }
 
+        public static List<string> GetColorsContaining(List<string> containedColors)
+        {
+            var result = GetRules().
+                Where(s =>  containedColors.Any(c => s.Contains(c) && !s.StartsWith(c))).
+                Select(s => s.Substring(0, s.IndexOf("bags") - 1)).ToList();
+
+            return result;
+        }
+
         public static int GetBagsCount(string color)
         {
             int result = 0;
@@ -89,6 +60,24 @@ namespace CodeAdvent2020.Code
 
             return result;
         }
+
+
+        public static int Part1()
+        {
+            var containedColors = new List<string> { "shiny gold" };
+            int foundIterationCount = 0;
+            var totalContainingColors = new List<string>();
+            do
+            {
+                containedColors = GetColorsContaining(containedColors);
+                totalContainingColors.AddRange(containedColors);
+                foundIterationCount = containedColors.Count;
+            } while (foundIterationCount > 0);
+
+            return totalContainingColors.Distinct().Count();
+
+        }
+
 
         public static int Part2()
         {
