@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CodeAdvent2020.Code
@@ -21,8 +22,19 @@ namespace CodeAdvent2020.Code
             return result;
         }
 
+        public static List<string> GetContainedColors(List<string> containingColors)
+        {
+            var result = Bags.
+                Where(b => containingColors.Contains(b.Color)).
+                SelectMany(b => b.Contents.Select(c => c.Color)).ToList();
 
+            return result;
 
+        }
+
+        public record BagContent(string Color , int Count);
+        public record Bag(string Color,List<BagContent> Contents);
+        private static List<Bag> Bags = new List<Bag>();
         public static int Part1()
         {
             var containedColors = new List<string> { "shiny gold" };
@@ -37,6 +49,52 @@ namespace CodeAdvent2020.Code
 
             return totalContainingColors.Distinct().Count();
 
+        }
+
+        public static void PopulateBags()
+        {
+            var rules = GetRules();
+            var result = new List<Bag>();
+            foreach (var rule in rules)
+            {
+                var matches = Regex.Match(rule, @"(\w+ \w+) bags contain (.+)");
+                string color = matches.Groups[1].Value;
+                var bagContents = new List<BagContent>();
+                foreach (var content in matches.Groups[2].Value.Split(","))
+                {
+                    if (content.StartsWith("no")) continue;
+                    var contentMatch = Regex.Match(content, @"(\d+) (\w+ \w+)");
+                    string contentColor = contentMatch.Groups[2].Value;
+                    int contentCount = int.Parse(contentMatch.Groups[1].Value);
+                    bagContents.Add(new BagContent(contentColor, contentCount));
+                }
+                result.Add(new Bag(color, bagContents));
+            }
+            Bags = result;
+        }
+
+        public static int GetBagsCount(string color)
+        {
+            int result = 0;
+            var bag = Bags.First(b => b.Color == color);
+            if (bag.Contents.Count > 0)
+            {
+                result = bag.Contents.Sum(c => c.Count);
+                foreach (var content in bag.Contents)
+                {
+                    result += content.Count * GetBagsCount(content.Color);
+                }
+
+            }
+
+            return result;
+        }
+
+        public static int Part2()
+        {
+            PopulateBags();
+            int count = GetBagsCount("shiny gold");
+            return count;
         }
     }
 }
