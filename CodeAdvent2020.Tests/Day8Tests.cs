@@ -20,7 +20,7 @@ namespace CodeAdvent2020.Tests
         public void Part2()
         {
             var result = Day8.Part2();
-            Assert.True(result == 0);
+            Assert.True(result > 0);
         }
 
     }

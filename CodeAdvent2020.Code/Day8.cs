@@ -17,7 +17,7 @@ namespace CodeAdvent2020.Code
             File.ReadAllLines("InputFiles/Day8.txt").
             Select((l,i) => new Line(Enum.Parse<Command>(l.Substring(0, 3)), int.Parse(l.Substring(3)) , i)).ToList();
         public static int Part1() => GetAccumulatorAndLastIndex(GetLines()).Accumulator;
-        public static (int Accumulator,int LastIndex , bool ExitedProperly ) GetAccumulatorAndLastIndex(List<Line> lines)
+        public static (int Accumulator , bool ExitedProperly ) GetAccumulatorAndLastIndex(List<Line> lines)
         {
             int accumulator = 0;
             int nextIndex = 0;
@@ -26,7 +26,7 @@ namespace CodeAdvent2020.Code
 
             while (!processedLineIndexes.Contains(nextIndex))
             {
-                if(nextIndex == lines.Count-1)
+                if(nextIndex == lines.Count)
                 {
                     exitedProperly = true;
                     break;
@@ -50,7 +50,7 @@ namespace CodeAdvent2020.Code
                 }
             }
            
-            return (accumulator , nextIndex , exitedProperly);
+            return (accumulator  , exitedProperly);
 
 
         }
@@ -61,16 +61,14 @@ namespace CodeAdvent2020.Code
             {
                 var lineToChange = lines.FirstOrDefault(l => l.Index > firstIndex && (l.Command == Command.jmp || l.Command == Command.nop));
                 firstIndex = lineToChange.Index;
-                lines[lineToChange.Index] = new Line(lineToChange.Command == Command.jmp ? Command.nop : Command.jmp, lineToChange.Parameter, lineToChange.Index);
+                lineToChange = new Line(lineToChange.Command == Command.jmp ? Command.nop : Command.jmp, lineToChange.Parameter, lineToChange.Index);
+                lines[lineToChange.Index] = lineToChange;
                 var result = GetAccumulatorAndLastIndex(lines);
                 if(result.ExitedProperly)
                 {
                     return result.Accumulator;
                 }
-                else
-                {
-                    lines[lineToChange.Index] = new Line(lineToChange.Command == Command.jmp ? Command.nop : Command.jmp, lineToChange.Parameter, lineToChange.Index);
-                }
+                lines[lineToChange.Index] = new Line(lineToChange.Command == Command.jmp ? Command.nop : Command.jmp, lineToChange.Parameter, lineToChange.Index);
             }
             
         }
