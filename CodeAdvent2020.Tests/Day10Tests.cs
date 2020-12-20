@@ -16,6 +16,12 @@ namespace CodeAdvent2020.Tests
             var result = Day10.Part1();
             Assert.True(result > 0);
         }
+        [Fact]
+        public void Part2()
+        {
+            var result = Day10.Part2();
+            Assert.True(result > 0);
+        }
 
     }
 }
