@@ -18,7 +18,7 @@ namespace CodeAdvent2020.Code.CodeSignal
                 leftCount += candlesNumber;
                 candlesNumber = leftCount / makeNew;
                 leftCount -= candlesNumber * makeNew;
-            } while (candlesNumber > 0 || candlesNumber + leftCount >= makeNew);
+            } while (candlesNumber > 0 );
 
             return burnCount;
         }
