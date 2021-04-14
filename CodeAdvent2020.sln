@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeAdvent2020.Code", "CodeAdvent2020.Code\CodeAdvent2020.Code.csproj", "{F901AB92-5C0B-4B47-99C6-9FA33E2BD976}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeAdvent.Code", "CodeAdvent2020.Code\CodeAdvent.Code.csproj", "{F901AB92-5C0B-4B47-99C6-9FA33E2BD976}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeAdvent2020.Tests", "CodeAdvent2020.Tests\CodeAdvent2020.Tests.csproj", "{5136DCFD-4717-42F7-A4DF-6F48B8287B10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeAdvent.Tests", "CodeAdvent2020.Tests\CodeAdvent.Tests.csproj", "{5136DCFD-4717-42F7-A4DF-6F48B8287B10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeAdvent.UI", "CodeAdvent.Console\CodeAdvent.UI.csproj", "{6EA9E1C0-4247-4B68-96DC-F509F5C1AA6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5136DCFD-4717-42F7-A4DF-6F48B8287B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5136DCFD-4717-42F7-A4DF-6F48B8287B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5136DCFD-4717-42F7-A4DF-6F48B8287B10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EA9E1C0-4247-4B68-96DC-F509F5C1AA6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EA9E1C0-4247-4B68-96DC-F509F5C1AA6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EA9E1C0-4247-4B68-96DC-F509F5C1AA6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EA9E1C0-4247-4B68-96DC-F509F5C1AA6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

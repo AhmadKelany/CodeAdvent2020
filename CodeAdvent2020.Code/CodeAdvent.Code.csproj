@@ -6,47 +6,48 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="InputFiles\" />
+    <Folder Include="2020\InputFiles\" />
+    <Folder Include="2015\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Day3.cs">
+    <Compile Update="2020\Day3.cs">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="InputFiles\Day1.txt">
+    <None Update="2020\InputFiles\Day1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="InputFiles\Day10.txt">
+    <None Update="2020\InputFiles\Day10.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="InputFiles\Day11.txt">
+    <None Update="2020\InputFiles\Day11.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="InputFiles\Day2.txt">
+    <None Update="2020\InputFiles\Day2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="InputFiles\Day3.txt">
+    <None Update="2020\InputFiles\Day3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="InputFiles\Day4.txt">
+    <None Update="2020\InputFiles\Day4.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="InputFiles\Day5.txt">
+    <None Update="2020\InputFiles\Day5.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="InputFiles\Day6.txt">
+    <None Update="2020\InputFiles\Day6.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="InputFiles\Day7.txt">
+    <None Update="2020\InputFiles\Day7.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="InputFiles\Day8.txt">
+    <None Update="2020\InputFiles\Day8.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="InputFiles\Day9.txt">
+    <None Update="2020\InputFiles\Day9.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
