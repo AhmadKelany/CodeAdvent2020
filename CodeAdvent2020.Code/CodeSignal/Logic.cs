@@ -31,7 +31,8 @@ namespace CodeAdvent2020.Code.CodeSignal
                 for (int j = 0; j < 4; j++)
                 {
                     if (i == j) continue;
-
+                    var intercepts = words[i].Intersect(words[j]);
+                    if (!intercepts.Any()) continue;
                 }
             }
             return 0;
