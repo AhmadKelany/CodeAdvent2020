@@ -17,5 +17,15 @@ namespace CodeAdvent2020.Tests
         {
             Assert.Equal(expected, Code.CodeSignal.Logic.candles(candlesCount, newMake));
         }
+
+        [Theory]
+        [InlineData(6, "crossword","square","formation","something")]
+        [InlineData(0, "anaesthetist","thatch","ethnics","sabulous")]
+        [InlineData(4, "eternal","texas","chainsaw","massacre")]
+        public void crossWordFormation(int expected , string w1 , string w2, string w3, string w4 )
+        {
+            string[] words = new string[] { w1, w2, w3, w4 };
+            Assert.Equal(6, Logic.crosswordFormation(words));
+        }
     }
 }

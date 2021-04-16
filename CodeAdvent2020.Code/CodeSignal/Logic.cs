@@ -23,5 +23,19 @@ namespace CodeAdvent2020.Code.CodeSignal
             return burnCount;
         }
 
+        public static int crosswordFormation(string[] words)
+        {
+            int count = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (i == j) continue;
+
+                }
+            }
+            return 0;
+        }
+
     }
 }
