@@ -25,7 +25,7 @@ namespace CodeAdvent2020.Tests
         public void crossWordFormation(int expected , string w1 , string w2, string w3, string w4 )
         {
             string[] words = new string[] { w1, w2, w3, w4 };
-            Assert.Equal(6, Logic.crosswordFormation(words));
+            Assert.Equal(expected, Logic.crosswordFormation(words));
         }
     }
 }
