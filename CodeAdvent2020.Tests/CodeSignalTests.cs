@@ -11,6 +11,18 @@ namespace CodeAdvent2020.Tests
     public class CodeSignalTests
     {
         [Theory]
+        [InlineData(true , "aa" , "AAB")]
+        [InlineData(true , "mehOu", "mehau")]
+        [InlineData(true , "aaad", "aaAdd")]
+        [InlineData(false, "123za", "123Z")]
+        public void UnstablePairTests(bool expexted , string f1 , string f2)
+        {
+            Assert.Equal(expexted, Logic.isUnstablePair(f1, f2));
+        }
+
+
+
+        [Theory]
         [InlineData(5,2,9)]
         [InlineData(1,2,1)]
         public void candlesTest(int candlesCount , int newMake , int expected)

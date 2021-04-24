@@ -8,6 +8,34 @@ namespace CodeAdvent2020.Code.CodeSignal
 {
     public class Logic
     {
+
+
+        public static bool isUnstablePair(string f1, string f2)
+        {
+
+
+
+            var m = Math.Min(f1.Length, f2.Length);
+            int index = -1;
+            for (int i = 0; i < m; i++)
+            {
+                if (f1[i] != f2[i])
+                {
+                    index = i;
+                    break;
+                }
+            }
+            if(index == -1)
+            {
+                return false;
+            }
+            else
+            {
+                return f1[index] < f2[index] ? string.Compare(f1,f2) > 0 : string.Compare(f2, f1) > 0;
+            }
+            
+        }
+
         public static int candles(int candlesNumber, int makeNew)
         {
             int leftCount = 0;
