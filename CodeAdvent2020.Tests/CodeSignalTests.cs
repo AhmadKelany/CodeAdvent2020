@@ -10,6 +10,20 @@ namespace CodeAdvent2020.Tests
 {
     public class CodeSignalTests
     {
+
+        [Theory]
+        [InlineData(true, "aacb", "aabc")]
+        [InlineData(false, "aa", "bc")]
+        [InlineData(true, "aaxxaaz", "aazzaay")]
+        [InlineData(true, "aabc", "aacb")]
+        [InlineData(false, "aaxyaa", "aazzaa")]
+        public void substitutionCipher(bool expected , string s1 , string s2)
+        {
+            Assert.Equal(expected, Logic.isSubstitutionCipher(s1, s2));
+        }
+
+
+
         [Theory]
         [InlineData(true , "aa" , "AAB")]
         [InlineData(true , "mehOu", "mehau")]

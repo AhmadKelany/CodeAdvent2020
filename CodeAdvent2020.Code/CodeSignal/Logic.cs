@@ -9,6 +9,27 @@ namespace CodeAdvent2020.Code.CodeSignal
     public class Logic
     {
 
+        public static bool isSubstitutionCipher(string s1, string s2)
+        {
+            if (s1.Distinct().Count() == s1.Length && s2.Distinct().Count() == s2.Length) return true;
+            var r = verify(s1, s2);
+            return r ? verify(s2, s1) : r;
+        }
+
+
+        static bool verify(string s1, string s2)
+        {
+            bool result = true;
+            for (int i = 0; i < s1.Length; i++)
+            {
+                var a = s1[i];
+                var b = s2[i];
+                var aindexes = s1.Select((c, i) => c == a ? i : -1).Where(i => i >= 0);
+                result = s2.Where((c, i) => aindexes.Contains(i)).All(c => c == b);
+                if (!result) return result;
+            }
+            return result;
+        }
 
         public static bool isUnstablePair(string f1, string f2)
         {
