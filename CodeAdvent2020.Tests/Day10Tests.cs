@@ -1,4 +1,4 @@
-﻿using CodeAdvent2020.Code;
+﻿using CodeAdvent.Code._2020;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace CodeAdvent2020.Tests
+namespace CodeAdvent.Tests
 {
     public class Day10Tests
     {

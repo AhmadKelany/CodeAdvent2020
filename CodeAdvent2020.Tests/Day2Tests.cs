@@ -1,7 +1,7 @@
-﻿using CodeAdvent2020.Code;
+﻿using CodeAdvent.Code._2020;
 using System.Linq;
 using Xunit;
-using static CodeAdvent2020.Code.Day2;
+using static CodeAdvent.Code._2020.Day2;
 
 namespace CodeAdvent2020.Tests
 {

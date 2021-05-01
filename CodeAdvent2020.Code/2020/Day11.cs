@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeAdvent2020.Code._2020
+namespace CodeAdvent.Code._2020
 {
     public class Day11
     {

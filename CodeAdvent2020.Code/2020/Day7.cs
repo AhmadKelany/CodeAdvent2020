@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace CodeAdvent2020.Code._2020
+namespace CodeAdvent.Code._2020
 {
     public class Day7
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodeAdvent2020.Code
+namespace CodeAdvent.Code
 {
     public static class Screen
     {
