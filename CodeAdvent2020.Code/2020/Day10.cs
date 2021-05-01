@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeAdvent2020.Code
+namespace CodeAdvent2020.Code._2020
 {
     public class Day10
     {

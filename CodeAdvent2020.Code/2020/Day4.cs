@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace CodeAdvent2020.Code
+namespace CodeAdvent2020.Code._2020
 {
     public static class Day4
     {

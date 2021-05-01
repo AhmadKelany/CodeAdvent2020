@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace CodeAdvent2020.Code
+namespace CodeAdvent2020.Code._2020
 {
     public class Day1
     {
@@ -11,10 +12,13 @@ namespace CodeAdvent2020.Code
         public static int Part1() 
         {
             var inputs = GetInputs();
-            return (from x in inputs
+            var result =  (from x in inputs
                     from y in inputs.Skip(1)
                     where x + y == 2020
                     select x * y).FirstOrDefault();
+
+            Screen.WriteLine($"result = {result}");
+            return result;
         }
         public static int Part2() 
         {

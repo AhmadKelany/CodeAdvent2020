@@ -5,4 +5,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CodeAdvent2020.Code\CodeAdvent.Code.csproj" />
+  </ItemGroup>
+
 </Project>
