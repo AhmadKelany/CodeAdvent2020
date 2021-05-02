@@ -8,7 +8,7 @@ namespace CodeAdvent.Code._2020
 {
     public static class Day4
     {
-        public static List<string> GetPassports() => File.ReadAllText("InputFiles/Day4.txt").Split(Environment.NewLine + Environment.NewLine).ToList();
+        public static List<string> GetPassports() => File.ReadAllText("2020/InputFiles/Day4.txt").Split(Environment.NewLine + Environment.NewLine).ToList();
 
 
         public static int Part1() => GetPassports().Count(Part1IsValid);

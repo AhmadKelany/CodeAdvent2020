@@ -23,12 +23,9 @@ namespace CodeAdvent.UI
             try
             {
                 var s = input.Split(".");
-                //var type = Assembly.GetExecutingAssembly().GetType($"CodeAdvent.Code._{s[0]}.Day{s[1]})");  
                 var a = Assembly.GetAssembly(typeof(CodeAdvent.Code._2015.Day1));
                 var n = $"CodeAdvent.Code._{s[0]}.Day{s[1]}";
                 var type = a.GetType(n);
-                var ts = Assembly.GetExecutingAssembly().GetTypes();
-                
                 var m = type.GetMethod($"Part{s[2]}");
                 m.Invoke(null, null);
 

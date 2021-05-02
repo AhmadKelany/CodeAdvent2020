@@ -10,7 +10,7 @@ namespace CodeAdvent.Code._2020
     public class Day9
     {
         public static List<long> GetData() =>
-            File.ReadAllLines("InputFiles/Day9.txt").
+            File.ReadAllLines("2020/InputFiles/Day9.txt").
             Select(long.Parse).ToList();
 
         public static bool IsValid(long number , IEnumerable<long> previousNumbers)

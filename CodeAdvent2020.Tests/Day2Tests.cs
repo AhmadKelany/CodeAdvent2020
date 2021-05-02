@@ -41,13 +41,13 @@ namespace CodeAdvent2020.Tests
         [Fact]
         public void Part1Count()
         {
-            var result = Day2.Part1Count();
+            var result = Day2.Part1();
             Assert.True(result > 0);
         }
 [Fact]
         public void Part2Count()
         {
-            var result = Day2.Part2Count();
+            var result = Day2.Part2();
             Assert.True(result > 0);
         }
     }

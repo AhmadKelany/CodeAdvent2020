@@ -11,7 +11,7 @@ namespace CodeAdvent.Code._2020
         public record Bag(string Color, List<BagContent> Contents);
         private static List<Bag> Bags = new List<Bag>();
 
-        public static List<string> GetRules() => File.ReadAllLines("InputFiles/Day7.txt").ToList();
+        public static List<string> GetRules() => File.ReadAllLines("2020/InputFiles/Day7.txt").ToList();
         public static List<string> GetBagColors() => GetRules().Select(s => s.Substring(0, s.IndexOf("bags")-1)).ToList();
         public static void PopulateBags()
         {

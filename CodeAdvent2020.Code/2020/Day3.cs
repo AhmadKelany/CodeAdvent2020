@@ -6,7 +6,7 @@ namespace CodeAdvent.Code._2020
 {
     public class Day3
     {
-        public static List<string> GetInputs() => File.ReadAllLines("InputFiles/Day3.txt").ToList();
+        public static List<string> GetInputs() => File.ReadAllLines("2020/InputFiles/Day3.txt").ToList();
         public static int Part1() => GetTreesCount(new Slope(3, 1));
 
         public static long Part2()

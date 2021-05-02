@@ -13,7 +13,7 @@ namespace CodeAdvent.Code._2020
         public enum Command { acc, nop, jmp }
         public record Line(Command Command, int Parameter, int Index);
         public static List<Line> GetLines() =>
-            File.ReadAllLines("InputFiles/Day8.txt").
+            File.ReadAllLines("2020/InputFiles/Day8.txt").
             Select((l, i) => new Line(Command:Enum.Parse<Command>(l.Substring(0, 3)),
                                       Parameter: int.Parse(l.Substring(3)),
                                       Index:i)).ToList();

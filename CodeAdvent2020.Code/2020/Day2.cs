@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -6,7 +7,7 @@ namespace CodeAdvent.Code._2020
 {
     public class Day2
     {
-        public static List<Input> GetInputs() => File.ReadAllLines("InputFiles/Day2.txt").Select(GetInput).ToList();
+        public static List<Input> GetInputs() => File.ReadAllLines("2020/InputFiles/Day2.txt").Select(GetInput).ToList();
 
         public static Input GetInput(string line)
         {
@@ -31,8 +32,20 @@ namespace CodeAdvent.Code._2020
         {
             return input.password[input.Min-1] == input.letter ^ input.password[input.Max-1] == input.letter;
         }
-        public static int Part1Count() => GetInputs().Count(Part1Valid);
+        public static int Part1()
+        {
+            var result = GetInputs().Count(Part1Valid);
+            Screen.WriteLine($"result = {result}", ConsoleColor.Green);
+            return result;
 
-        public static int Part2Count() => GetInputs().Count(Part2Valid);
+        }
+
+        public static int Part2()
+        {
+            var result = GetInputs().Count(Part2Valid);
+            Screen.WriteLine($"result = {result}", ConsoleColor.Green);
+            return result;
+
+        }
     }
 }

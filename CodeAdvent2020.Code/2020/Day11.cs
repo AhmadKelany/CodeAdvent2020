@@ -109,7 +109,7 @@ namespace CodeAdvent.Code._2020
         //}
         public static List<Seat> GetSeats()
         {
-            var lines = File.ReadAllLines("InputFiles/Day11.txt");
+            var lines = File.ReadAllLines("2020/InputFiles/Day11.txt");
             var width = lines.First().Length;
             var height = lines.Count();
             var maxId = (width * height) - 1;

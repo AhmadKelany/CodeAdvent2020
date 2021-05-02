@@ -17,17 +17,21 @@ namespace CodeAdvent.Code._2020
                     where x + y == 2020
                     select x * y).FirstOrDefault();
 
-            Screen.WriteLine($"result = {result}");
+            Screen.WriteLine($"result = {result}" , ConsoleColor.Green);
             return result;
         }
         public static int Part2() 
         {
             var inputs = GetInputs();
-            return (from x in inputs
+            var result = (from x in inputs
                     from y in inputs.Skip(1)
                     from z in inputs.Skip(2)
                     where x + y + z == 2020
                     select x * y * z).FirstOrDefault();
+
+            Screen.WriteLine($"result = {result}", ConsoleColor.Green);
+            return result;
+
         }
     }
 }

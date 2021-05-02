@@ -12,7 +12,7 @@ namespace CodeAdvent.Code._2020
     {
         public static ImmutableList<int> GetData()
         {
-            var chargers = File.ReadAllLines("InputFiles/Day10.txt").Select(int.Parse).OrderBy(i => i);
+            var chargers = File.ReadAllLines("2020/InputFiles/Day10.txt").Select(int.Parse).OrderBy(i => i);
 
             return ImmutableList.Create(0).AddRange(chargers).Add(chargers.Last() + 3);
         }

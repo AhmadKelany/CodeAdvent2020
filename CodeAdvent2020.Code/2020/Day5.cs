@@ -7,7 +7,7 @@ namespace CodeAdvent.Code._2020
 {
     public class Day5
     {
-        public static List<string> GetPasses() => File.ReadAllText("InputFiles/Day5.txt").Split(Environment.NewLine).ToList();
+        public static List<string> GetPasses() => File.ReadAllText("2020/InputFiles/Day5.txt").Split(Environment.NewLine).ToList();
         public static int GetSeatId(string pass)
         {
             int row = GetCoordinate(pass.Substring(0, 7), 128);
