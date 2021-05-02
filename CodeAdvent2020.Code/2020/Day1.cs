@@ -7,7 +7,7 @@ namespace CodeAdvent.Code._2020
 {
     public class Day1
     {
-        public static List<int> GetInputs() => File.ReadAllLines("InputFiles/Day1.txt").Select(int.Parse).ToList();
+        public static List<int> GetInputs() => File.ReadAllLines("2020/InputFiles/Day1.txt").Select(int.Parse).ToList();
         
         public static int Part1() 
         {
