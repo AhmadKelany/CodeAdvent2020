@@ -10,7 +10,7 @@ namespace CodeAdvent.UI
         {
             while(true)
             {
-                Screen.WriteLine("Please enter function data to solve, format: yyyy.d.i e.g.: 2015.1.1 will display 2015 day 1 part 1",
+                Screen.WriteLine("Please enter function data to solve,\nformat: yyyy.d.i\ne.g.: 2015.1.1 will display 2015 day 1 part 1",
                     ConsoleColor.Yellow);
                 
                 var input = Console.ReadLine();
