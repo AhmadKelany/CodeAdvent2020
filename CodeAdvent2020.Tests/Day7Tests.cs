@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using CodeAdvent2020.Code;
+using CodeAdvent.Code._2020;
 
 namespace CodeAdvent2020.Tests
 {

@@ -1,4 +1,4 @@
-﻿using CodeAdvent2020.Code;
+﻿using CodeAdvent.Code._2020;
 using Xunit;
 
 namespace CodeAdvent2020.Tests
