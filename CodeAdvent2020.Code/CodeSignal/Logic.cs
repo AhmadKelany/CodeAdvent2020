@@ -8,6 +8,25 @@ namespace CodeAdvent2020.Code.CodeSignal
 {
     public class Logic
     {
+        public static int constructSquare(string s)
+        {
+            int minSquare = (int)Math.Pow(10,s.Length-1);
+            int maxSquare = (int)Math.Pow(10, s.Length ) - 1;
+            int minNum = (int)Math.Sqrt(minSquare);
+            int maxNum = (int)Math.Sqrt(maxSquare);
+            for (int i = maxNum; i >= minNum; i--)
+            {
+                int sqr =(int)Math.Pow(i, 2);
+                string sqrString = $"{sqr}";
+                var sCounts = s.GroupBy(c => c).Select(g => g.Count()).OrderBy(x => x).Aggregate("" ,(s , x) => s + $"{x}");
+                var sqrCounts = sqrString.GroupBy(c => c).Select(g => g.Count()).OrderBy(x => x).Aggregate("" ,(s , x) => s + $"{x}");
+                if (sqrCounts == sCounts)
+                {
+                    return sqr;
+                }
+            }
+            return -1;
+        }
 
         public static bool isSubstitutionCipher(string s1, string s2)
         {

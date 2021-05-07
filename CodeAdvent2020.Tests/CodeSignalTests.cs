@@ -12,6 +12,18 @@ namespace CodeAdvent2020.Tests
     {
 
         [Theory]
+        [InlineData(81, "ab")]
+        [InlineData(-1, "zzz")]
+        [InlineData(900, "aba")]
+        [InlineData(810000, "abcbbb")]
+        [InlineData(961, "abc")]
+        public void constructSquare(int expected , string input)
+        {
+            Assert.Equal(expected, Logic.constructSquare(input));
+        }
+
+
+        [Theory]
         [InlineData(true, "aacb", "aabc")]
         [InlineData(false, "aa", "bc")]
         [InlineData(true, "aaxxaaz", "aazzaay")]
