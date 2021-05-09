@@ -11,6 +11,19 @@ namespace CodeAdvent2020.Tests
     public class CodeSignalTests
     {
 
+
+        [Theory]
+        [InlineData(11, new int[] { 20000, 239, 10001, 999999, 10000, 20566, 29999 })]
+        [InlineData(28, new int[] { 10000, 20000, 30000, 40000, 50000, 60000, 10000, 120000, 150000, 200000, 300000, 1000000, 10000000, 100000000, 10000000 })]
+        [InlineData(2, new int[] { 10000 })]
+        [InlineData(3, new int[] { 10000 , 1})]
+        [InlineData(20, new int[] { 1000000000, 999990000, 999980000, 999970000, 999960000, 999950000, 999940000, 999930000, 999920000, 999910000 })]
+        [InlineData(24, new int[] { 102382103, 21039898, 39823, 433, 30928398, 40283209, 23234, 342534, 98473483, 498398424, 9384984, 9839239 })]
+        public void numbersGroupingTest(int expected, int[] input)
+        {
+            Assert.Equal(expected, Logic.numbersGrouping(input));
+        }
+
         [Theory]
         [InlineData(81, "ab")]
         [InlineData(-1, "zzz")]

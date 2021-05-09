@@ -8,6 +8,14 @@ namespace CodeAdvent2020.Code.CodeSignal
 {
     public class Logic
     {
+        public static int numbersGrouping(int[] a)
+        {
+            var groups = a.GroupBy(i => (int)(i / 10_000));
+            return a.Count() + groups.Count();
+        }
+
+
+
         public static int constructSquare(string s)
         {
             int minSquare = (int)Math.Pow(10,s.Length-1);
