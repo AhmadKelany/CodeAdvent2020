@@ -10,7 +10,7 @@ namespace CodeAdvent2020.Code.CodeSignal
     {
         public static int numbersGrouping(int[] a)
         {
-            var groups = a.GroupBy(i => (int)(i / 10_000));
+            var groups = a.GroupBy(i =>   (i-1)/10_000 );
             return a.Count() + groups.Count();
         }
 
