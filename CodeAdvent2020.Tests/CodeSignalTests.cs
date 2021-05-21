@@ -11,6 +11,13 @@ namespace CodeAdvent2020.Tests
     public class CodeSignalTests
     {
 
+        [Theory]
+        [InlineData(true , "sdffgfhg")]
+        [InlineData(false , "sdfgfhg")]
+        public void containsDuplicateLetter(bool expected , string input)
+        {
+            Assert.Equal(expected , CodeAdvent.Code._2015.Day5.HasAtLeastOneDuplicate(input));
+        }
 
         [Theory]
         [InlineData(11, new int[] { 20000, 239, 10001, 999999, 10000, 20566, 29999 })]
