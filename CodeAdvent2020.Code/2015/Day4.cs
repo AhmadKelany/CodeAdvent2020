@@ -9,19 +9,20 @@ namespace CodeAdvent.Code._2015
 {
     public class Day4
     {
-        static string input = "abcdef";
-        static int GetRequiredInt(string input , int zerosCount)
+        static string input = "iwrupvqb";
+        static int GetRequiredInt(string input, int zerosCount)
         {
             string match = new string('0', zerosCount);
             int i = 0;
-            while (true)
+            using (var md5 = MD5.Create())
             {
-                byte[] dataToHashBytes = System.Text.Encoding.ASCII.GetBytes($"input{i++}");
-                using (var md5 = MD5.Create())
+                while (true)
                 {
-                    var hashed = md5.ComputeHash(dataToHashBytes);
-                    string hex = BitConverter.ToString(hashed).Replace("-", "");
-                    if (hex.StartsWith(match)) return i;
+
+                    var hashBytes = md5.ComputeHash(Encoding.ASCII.GetBytes($"{input}{i}"));
+                    var hash = string.Join("", hashBytes.Select(b => b.ToString("x2")));
+                    if (hash.StartsWith(match)) return i;
+                    i += 1;
                 }
             }
         }
