@@ -13,10 +13,30 @@ namespace CodeAdvent.Code._2015
         static int GetRequiredInt(string input , int zerosCount)
         {
             string match = new string('0', zerosCount);
+            int i = 0;
             while (true)
             {
-                var hex = MD5.Create();
+                byte[] dataToHashBytes = System.Text.Encoding.ASCII.GetBytes($"input{i++}");
+                using (var md5 = MD5.Create())
+                {
+                    var hashed = md5.ComputeHash(dataToHashBytes);
+                    string hex = BitConverter.ToString(hashed).Replace("-", "");
+                    if (hex.StartsWith(match)) return i;
+                }
             }
         }
+        public static int Part1()
+        {
+            int result = GetRequiredInt(input, 5);
+            Screen.WriteLine($"Result = {result}", ConsoleColor.Green);
+            return result;
+        }
+        public static int Part2()
+        {
+            int result = GetRequiredInt(input, 6);
+            Screen.WriteLine($"Result = {result}", ConsoleColor.Green);
+            return result;
+        }
+
     }
 }
