@@ -12,6 +12,15 @@ namespace CodeAdvent2020.Tests
     {
 
         [Theory]
+        [InlineData(9,17)]
+        [InlineData(9,88)]
+        public void mostFrequentSum(int expected , int input)
+        {
+            Assert.Equal(expected, Logic.mostFrequentDigitSum(input));
+        }
+
+
+        [Theory]
         [InlineData(true , "sdffgfhg")]
         [InlineData(false , "sdfgfhg")]
         public void containsDuplicateLetter(bool expected , string input)

@@ -14,6 +14,18 @@ namespace CodeAdvent2020.Code.CodeSignal
             return a.Count() + groups.Count();
         }
 
+        public static int mostFrequentDigitSum(int n)
+        {
+            var l = new List<int>();
+            while (n > 0)
+            {
+                l.Add(n);
+                n = n - digitSUm(n);
+            }
+            return l.Select(digitSUm).GroupBy(x => x).OrderByDescending(g => g.Count()).ThenByDescending(g => g.Key).First().Key;
+        }
+
+        static int digitSUm(int x) => $"{x}".Sum(c => int.Parse($"{c}"));
 
 
         public static int constructSquare(string s)
