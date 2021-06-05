@@ -14,6 +14,20 @@ namespace CodeAdvent.Code._2015
         {
             return int.TryParse(s, out _);
         }
+
+        public record Action (string Command , int O1 , int O2 , string key);
+        public static void ApplyAction(Action action , Dictionary<string, int> data)
+        {
+            if (action.O1 == -1 || action.O2 == -1)
+            {
+                return;
+            }
+            data[action.key] = action.Command switch
+            {
+                "ASSIGN" => action.O1,
+                "AND" => action.O1 & action.O2
+            };
+        }
         public static void ProcessData(string s, Dictionary<string, int> data)
         {
             var a = s.Split(' ');
