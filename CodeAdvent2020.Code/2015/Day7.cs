@@ -15,17 +15,70 @@ namespace CodeAdvent.Code._2015
             return int.TryParse(s, out _);
         }
 
-        public record Action (string Command , int O1 , int O2 , string key);
-        public static void ApplyAction(Action action , Dictionary<string, int> data)
+        public record Action(string Command, string OtherKey1, string OtherKey2, int O1, int O2, string key);
+        public static Action GetAction(string s)
         {
-            if (action.O1 == -1 || action.O2 == -1)
+            var a = s.Split(' ');
+            string key = a[a.Length - 1];
+            string command = "";
+            // operands (o1,o2) : -1:other key has value, -2:operand not considered
+            int o1 = -1;
+            int o2 = -2;
+            string otherKey1 = "";
+            string otherKey2 = "";
+            switch (a.Length)
+            {
+                case 3: // assignment
+                    command = "ASSIGN";
+                    AssignOperandData(a[0], ref o1, ref otherKey1);
+                    break;
+                case 4: // not
+                    command = "NOT";
+                    AssignOperandData(a[1], ref o1, ref otherKey1);
+                    break;
+                case 5: // and, or, lshift, rshift
+                    command = a[1];
+                    AssignOperandData(a[0], ref o1, ref otherKey1);
+                    AssignOperandData(a[2], ref o2, ref otherKey2);
+                    break;
+                default:
+                    break;
+            }
+
+
+
+            return new Action(command, otherKey1, otherKey2, o1, o2, key);
+        }
+
+        static void AssignOperandData(string input, ref int operand, ref string key)
+        {
+            if (IsInt(input))
+            {
+                operand = int.Parse(input);
+            }
+            else
+            {
+                key = input;
+            }
+
+        }
+        public static void ApplyAction(Action action, Dictionary<string, int> data)
+        {
+            if ((action.O1 == -1 && !data.ContainsKey(action.OtherKey1)) || (action.O2 == -1 && !data.ContainsKey(action.OtherKey2)))
             {
                 return;
             }
+            var o1 = action.O1 == -1 ? data[action.OtherKey1] : action.O1;
+            var o2 = action.O2 == -2 ? 0 : (action.O2 == -1 ? data[action.OtherKey2] : action.O2);
+
             data[action.key] = action.Command switch
             {
-                "ASSIGN" => action.O1,
-                "AND" => action.O1 & action.O2
+                "ASSIGN" => o1,
+                "AND" => o1 & o2,
+                "OR" => o1 | o2,
+                "NOT" => UInt16.MaxValue - o1,
+                "LSHIFT" => o1 >> o2,
+                "RSHIFT" => o1 << o2
             };
         }
         public static void ProcessData(string s, Dictionary<string, int> data)
@@ -70,18 +123,19 @@ namespace CodeAdvent.Code._2015
             }
         }
 
-    }
 
-    public static int Part1()
-    {
-        var d = new Dictionary<string, int>();
-        foreach (var item in GetInput())
+
+        public static int Part1()
         {
-            ProcessData(item, d);
+            var d = new Dictionary<string, int>();
+            var actions = GetInput().Select(GetAction);
+            foreach (var action in actions)
+            {
+                ApplyAction(action, d);
+            }
+            var result = d["a"];
+            Screen.WriteLine($"Part 1 result = {result}");
+            return result;
         }
-        var result = d["a"];
-        Screen.WriteLine($"Part 1 result = {result}");
-        return result;
     }
-}
 }
