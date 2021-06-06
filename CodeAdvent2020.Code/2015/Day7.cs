@@ -15,7 +15,28 @@ namespace CodeAdvent.Code._2015
             return int.TryParse(s, out _);
         }
 
-        public record Action(string Command, string OtherKey1, string OtherKey2, int O1, int O2, string key);
+        public record Action(string Command, string OtherKey1, string OtherKey2, int O1, int O2, string key)
+        {
+            public override string ToString()
+            {
+                return $"C:{Command},K:{key},O1:{O1},O2:{O2},O1K:{OtherKey1},O2K:{OtherKey2}";
+            }
+        }
+
+        static void AddToStack(string key , List<Action> data , Stack<Action> stack)
+        {
+            var action = data.FirstOrDefault(a => a.key == key);
+            stack.Push(action);
+            //Console.WriteLine($"added{action}");
+            
+            if (action.O1 != -1 && action.O2 != -1) return;
+            var oa1 = stack.FirstOrDefault(a => a.key == action.OtherKey1);
+            var oa2 = stack.FirstOrDefault(a => a.key == action.OtherKey2);
+            var ob1 = !stack.Any(a => a.key == action.OtherKey1);
+            var ob2 = !stack.Any(a => a.key == action.OtherKey2);
+            if (action.OtherKey1 != "" && !stack.Any(a => a.key == action.OtherKey1)) AddToStack(action.OtherKey1, data, stack);
+            if (action.OtherKey2 != "" && !stack.Any(a => a.key == action.OtherKey2)) AddToStack(action.OtherKey2, data, stack);
+        }
         public static Action GetAction(string s)
         {
             var a = s.Split(' ');
@@ -59,21 +80,22 @@ namespace CodeAdvent.Code._2015
             else
             {
                 key = input;
+                operand = -1;
             }
 
         }
         static int processed = 0;
-        public static void ApplyAction(Action action, Dictionary<string, int> data , Queue<Action> actions)
+        public static void ApplyAction(Action action, Dictionary<string, int> wires )
         {
-            if ((action.O1 == -1 && !data.ContainsKey(action.OtherKey1)) || (action.O2 == -1 && !data.ContainsKey(action.OtherKey2)))
-            {
-                actions.Enqueue(action);
-                return;
-            }
-            var o1 = action.O1 == -1 ? data[action.OtherKey1] : action.O1;
-            var o2 = action.O2 == -2 ? 0 : (action.O2 == -1 ? data[action.OtherKey2] : action.O2);
+            //if ((action.O1 == -1 && !data.ContainsKey(action.OtherKey1)) || (action.O2 == -1 && !data.ContainsKey(action.OtherKey2)))
+            //{
+            //    actions.Enqueue(action);
+            //    return;
+            //}
+            var o1 = action.O1 == -1 ? wires[action.OtherKey1] : action.O1;
+            var o2 = action.O2 == -2 ? 0 : (action.O2 == -1 ? wires[action.OtherKey2] : action.O2);
 
-            data[action.key] = action.Command switch
+            wires[action.key] = action.Command switch
             {
                 "ASSIGN" => o1,
                 "AND" => o1 & o2,
@@ -130,29 +152,41 @@ namespace CodeAdvent.Code._2015
 
         public static int Part1()
         {
-            var d = new Dictionary<string, int>();
-            var actions = new Queue<Action>();
-            GetInput().Reverse();
-            foreach (var input in GetInput())
-            {
-                actions.Enqueue(GetAction(input));
-            }
             var stack = new Stack<Action>();
-            while (true)
-            {
+            var allActions = GetInput().Select(GetAction).ToList();
+            AddToStack("a", allActions, stack);
+            var t = stack.Count;
 
-            }
-            var u = actions.Select(a => a.key).Distinct();
-            while (actions.Count > 0)
+
+
+
+
+
+
+            var wires = new Dictionary<string, int>();
+            //var actions = new Queue<Action>();
+            //GetInput().Reverse();
+            //foreach (var input in GetInput())
+            //{
+            //    actions.Enqueue(GetAction(input));
+            //}
+            //var stack = new Stack<Action>();
+            //while (true)
+            //{
+
+            //}
+            //var u = actions.Select(a => a.key).Distinct();
+            while (stack.Count > 0)
             {
-                var a = actions.Dequeue();
-                ApplyAction(a, d, actions);
+                var a = stack.Pop();
+                ApplyAction(a, wires);
             }
-            var result = d["a"];
-            Screen.WriteLine($"Processed = {processed}", ConsoleColor.Cyan);
+            var result = wires["a"];
+
 
             Screen.WriteLine($"Part 1 result = {result}");
             return result;
+           
         }
     }
 }
