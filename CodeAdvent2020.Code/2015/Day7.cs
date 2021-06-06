@@ -62,10 +62,12 @@ namespace CodeAdvent.Code._2015
             }
 
         }
-        public static void ApplyAction(Action action, Dictionary<string, int> data)
+        static int processed = 0;
+        public static void ApplyAction(Action action, Dictionary<string, int> data , Queue<Action> actions)
         {
             if ((action.O1 == -1 && !data.ContainsKey(action.OtherKey1)) || (action.O2 == -1 && !data.ContainsKey(action.OtherKey2)))
             {
+                actions.Enqueue(action);
                 return;
             }
             var o1 = action.O1 == -1 ? data[action.OtherKey1] : action.O1;
@@ -80,60 +82,75 @@ namespace CodeAdvent.Code._2015
                 "LSHIFT" => o1 >> o2,
                 "RSHIFT" => o1 << o2
             };
+            processed += 1;
         }
-        public static void ProcessData(string s, Dictionary<string, int> data)
-        {
-            var a = s.Split(' ');
+        //public static void ProcessData(string s, Dictionary<string, int> data)
+        //{
+        //    var a = s.Split(' ');
 
-            switch (a.Length)
-            {
-                case 3: // assignment, to a number or to another variable
-                    if (IsInt(a[0]) || data.ContainsKey(a[0]))
-                    {
-                        data[a[2]] = data.ContainsKey(a[0]) ? data[a[0]] : int.Parse(a[0]);
-                    }
-                    break;
-                case 4: // not
+        //    switch (a.Length)
+        //    {
+        //        case 3: // assignment, to a number or to another variable
+        //            if (IsInt(a[0]) || data.ContainsKey(a[0]))
+        //            {
+        //                data[a[2]] = data.ContainsKey(a[0]) ? data[a[0]] : int.Parse(a[0]);
+        //            }
+        //            break;
+        //        case 4: // not
 
-                    data[a[3]] = UInt16.MaxValue - int.Parse(a[1]);
-                    break;
-                case 5: // and, or, lshift, rshift
-                    int o1 = data.ContainsKey(a[0]) ? data[a[0]] : int.Parse(a[0]);
-                    int o2 = data.ContainsKey(a[2]) ? data[a[2]] : int.Parse(a[2]);
-                    switch (a[1])
-                    {
-                        case "AND":
-                            data[a[4]] = o1 & o2;
-                            break;
-                        case "OR":
-                            data[a[4]] = o1 | o2;
-                            break;
-                        case "LSHIFT":
-                            data[a[4]] = o1 >> o2;
-                            break;
-                        case "RSHIFT":
-                            data[a[4]] = o1 << o2;
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
+        //            data[a[3]] = UInt16.MaxValue - int.Parse(a[1]);
+        //            break;
+        //        case 5: // and, or, lshift, rshift
+        //            int o1 = data.ContainsKey(a[0]) ? data[a[0]] : int.Parse(a[0]);
+        //            int o2 = data.ContainsKey(a[2]) ? data[a[2]] : int.Parse(a[2]);
+        //            switch (a[1])
+        //            {
+        //                case "AND":
+        //                    data[a[4]] = o1 & o2;
+        //                    break;
+        //                case "OR":
+        //                    data[a[4]] = o1 | o2;
+        //                    break;
+        //                case "LSHIFT":
+        //                    data[a[4]] = o1 >> o2;
+        //                    break;
+        //                case "RSHIFT":
+        //                    data[a[4]] = o1 << o2;
+        //                    break;
+        //                default:
+        //                    break;
+        //            }
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
 
 
 
         public static int Part1()
         {
             var d = new Dictionary<string, int>();
-            var actions = GetInput().Select(GetAction);
-            foreach (var action in actions)
+            var actions = new Queue<Action>();
+            GetInput().Reverse();
+            foreach (var input in GetInput())
             {
-                ApplyAction(action, d);
+                actions.Enqueue(GetAction(input));
+            }
+            var stack = new Stack<Action>();
+            while (true)
+            {
+
+            }
+            var u = actions.Select(a => a.key).Distinct();
+            while (actions.Count > 0)
+            {
+                var a = actions.Dequeue();
+                ApplyAction(a, d, actions);
             }
             var result = d["a"];
+            Screen.WriteLine($"Processed = {processed}", ConsoleColor.Cyan);
+
             Screen.WriteLine($"Part 1 result = {result}");
             return result;
         }
