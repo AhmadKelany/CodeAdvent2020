@@ -1,13 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeAdvent2020.Code.CodeSignal
 {
     public class Logic
     {
+
+        public static int numberOfClans(int[] divisors, int k)
+        {
+            var q = from a in Enumerable.Range(1, k)
+                    from b in Enumerable.Range(2, k)
+                    where a<b && a != b && (divisors.All(d => a % d == 0 && b % d == 0) || divisors.All(d => a % d != 0 && b % d != 0))
+                    select (a, b);
+            var u = Enumerable.Range(1, k).Where(d => q.All(x => x.a != d && x.b != d));
+            return q.Count() + u.Count();
+        }
+
         public static int numbersGrouping(int[] a)
         {
             var groups = a.GroupBy(i =>   (i-1)/10_000 );
