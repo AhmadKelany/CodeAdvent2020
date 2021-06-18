@@ -9,9 +9,41 @@ namespace CodeAdvent2020.Code.CodeSignal
 
         public static int numberOfClans(int[] divisors, int k)
         {
+            var nums = Enumerable.Range(1,k).ToList();
+            var count = 0;
+            while (nums.Count > 0)
+            {
+                if (nums.Count == 1)
+                {
+                    count++;
+                    nums.Clear();
+                    continue;
+                }
+                int a = nums.First();
+                var rest = nums.Skip(1).ToList();
+                bool found = false;
+                foreach (int  b in rest)
+                {
+                    if (divisors.All(d => (a % d == 0) == (b % d == 0)))
+                    {
+                        nums.Remove(a);
+                        nums.Remove(b);
+                        count++;
+                        found = true;   
+                        break;
+                    }
+                }
+                if (!found)
+                {
+                    nums.Remove(a);
+                    count++;
+                }
+            }
+
+            return count;
             var q = from a in Enumerable.Range(1, k)
-                    from b in Enumerable.Range(2, k)
-                    where a<b && a != b && (divisors.All(d => a % d == 0 && b % d == 0) || divisors.All(d => a % d != 0 && b % d != 0))
+                    from b in Enumerable.Range(1, k)
+                    where a<b && a != b && divisors.All(d => (a%d == 0) == (b%d == 0))
                     select (a, b);
             var u = Enumerable.Range(1, k).Where(d => q.All(x => x.a != d && x.b != d));
             return q.Count() + u.Count();
