@@ -11,6 +11,13 @@ namespace CodeAdvent2020.Tests
     public class CodeSignalTests
     {
 
+
+        [Fact]
+        public void numOfClansTest()
+        {
+            Assert.Equal(4, Logic.numberOfClans(new int[] { 2, 3 }, 6));
+        }
+
         [Theory]
         [InlineData(9,17)]
         [InlineData(9,88)]

@@ -10,6 +10,10 @@ namespace CodeAdvent2020.Code.CodeSignal
         public static int numberOfClans(int[] divisors, int k)
         {
             var nums = Enumerable.Range(1,k).ToList();
+            var clan1 = nums.Where(n => divisors.All(d => n%d == 0));
+            var clan2 = nums.Where(n => divisors.All(d => n%d != 0));
+            var clan3 = nums.Except(clan1).Except(clan2);
+            return clan3.Count() + (clan2.Any() ? 1 : 0) + (clan1.Any() ? 1 : 0);
             var count = 0;
             while (nums.Count > 0)
             {
@@ -19,6 +23,9 @@ namespace CodeAdvent2020.Code.CodeSignal
                     nums.Clear();
                     continue;
                 }
+
+                //var tange = nums.Where(n => )
+
                 int a = nums.First();
                 var rest = nums.Skip(1).ToList();
                 bool found = false;
