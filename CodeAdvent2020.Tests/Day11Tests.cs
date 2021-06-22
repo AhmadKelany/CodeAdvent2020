@@ -10,12 +10,7 @@ namespace CodeAdvent2020.Tests
 {
     public class Day11Tests
     {
-        [Fact]
-        public void Part1()
-        {
-            var result = Day11.Part1();
-            Assert.True(result > 0);
-        }
+        
 
     }
 }

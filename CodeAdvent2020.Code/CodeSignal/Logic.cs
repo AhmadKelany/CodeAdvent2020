@@ -9,51 +9,62 @@ namespace CodeAdvent2020.Code.CodeSignal
 
         public static int numberOfClans(int[] divisors, int k)
         {
-            var nums = Enumerable.Range(1,k).ToList();
-            var clan1 = nums.Where(n => divisors.All(d => n%d == 0));
-            var clan2 = nums.Where(n => divisors.All(d => n%d != 0));
-            var clan3 = nums.Except(clan1).Except(clan2);
-            return clan3.Count() + (clan2.Any() ? 1 : 0) + (clan1.Any() ? 1 : 0);
-            var count = 0;
-            while (nums.Count > 0)
+            var set = new HashSet<string>();
+            for (int i = 1; i <= k; i++)
             {
-                if (nums.Count == 1)
+                String s = "";
+                for (int j = 0; j < divisors.Length; j++)
                 {
-                    count++;
-                    nums.Clear();
-                    continue;
+                    s += i % divisors[j] == 0 ? "1" : "0";
                 }
-
-                //var tange = nums.Where(n => )
-
-                int a = nums.First();
-                var rest = nums.Skip(1).ToList();
-                bool found = false;
-                foreach (int  b in rest)
-                {
-                    if (divisors.All(d => (a % d == 0) == (b % d == 0)))
-                    {
-                        nums.Remove(a);
-                        nums.Remove(b);
-                        count++;
-                        found = true;   
-                        break;
-                    }
-                }
-                if (!found)
-                {
-                    nums.Remove(a);
-                    count++;
-                }
+                set.Add(s);
             }
+            return set.Count;
+            //var nums = Enumerable.Range(1,k).ToList();
+            //var clan1 = nums.Where(n => divisors.All(d => n%d == 0));
+            //var clan2 = nums.Where(n => divisors.All(d => n%d != 0));
+            //var clan3 = nums.Except(clan1).Except(clan2);
+            //return clan3.Count() + (clan2.Any() ? 1 : 0) + (clan1.Any() ? 1 : 0);
+            //var count = 0;
+            //while (nums.Count > 0)
+            //{
+            //    if (nums.Count == 1)
+            //    {
+            //        count++;
+            //        nums.Clear();
+            //        continue;
+            //    }
 
-            return count;
-            var q = from a in Enumerable.Range(1, k)
-                    from b in Enumerable.Range(1, k)
-                    where a<b && a != b && divisors.All(d => (a%d == 0) == (b%d == 0))
-                    select (a, b);
-            var u = Enumerable.Range(1, k).Where(d => q.All(x => x.a != d && x.b != d));
-            return q.Count() + u.Count();
+            //    //var tange = nums.Where(n => )
+
+            //    int a = nums.First();
+            //    var rest = nums.Skip(1).ToList();
+            //    bool found = false;
+            //    foreach (int  b in rest)
+            //    {
+            //        if (divisors.All(d => (a % d == 0) == (b % d == 0)))
+            //        {
+            //            nums.Remove(a);
+            //            nums.Remove(b);
+            //            count++;
+            //            found = true;   
+            //            break;
+            //        }
+            //    }
+            //    if (!found)
+            //    {
+            //        nums.Remove(a);
+            //        count++;
+            //    }
+            //}
+
+            //return count;
+            //var q = from a in Enumerable.Range(1, k)
+            //        from b in Enumerable.Range(1, k)
+            //        where a<b && a != b && divisors.All(d => (a%d == 0) == (b%d == 0))
+            //        select (a, b);
+            //var u = Enumerable.Range(1, k).Where(d => q.All(x => x.a != d && x.b != d));
+            //return q.Count() + u.Count();
         }
 
         public static int numbersGrouping(int[] a)
