@@ -7,6 +7,20 @@ namespace CodeAdvent2020.Code.CodeSignal
     public class Logic
     {
 
+        public static String LongestConsec(string[] strarr, int k)
+        {
+            string longest = "";
+            for (int i = 0; i < strarr.Length - k + 1; i++)
+            {
+                var current = strarr.Skip(i).Take(k).Aggregate("", (x,y) => x+y);
+                if(current.Length > longest.Length)
+                {
+                    longest = current;
+                }
+            }
+            return longest;
+        }
+
         public static int MaxSequence(int[] arr) // codewars
         {
             if (arr.All(n => n < 0)) return 0;
