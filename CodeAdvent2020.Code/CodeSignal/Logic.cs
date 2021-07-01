@@ -7,6 +7,23 @@ namespace CodeAdvent2020.Code.CodeSignal
     public class Logic
     {
 
+        public static int MaxSequence(int[] arr) // codewars
+        {
+            if (arr.All(n => n < 0)) return 0;
+            if (arr.All(n => n >= 0)) return arr.Sum();
+            var sums = new List<int>(); 
+            var positiveIndexes = arr.Select((n, i) => n > 0 ? i : -1).Where(n => n >= 0);
+            if(positiveIndexes.Count() == 1) return positiveIndexes.First();
+            foreach (int posIndex in positiveIndexes)
+            {
+                foreach (var nextIndex in positiveIndexes.Where(i => i > posIndex))
+                {
+                    sums.Add(arr.Skip(posIndex).Take(nextIndex - posIndex).Sum());
+                }
+            }
+            return sums.Max();
+        }
+
         public static int numberOfClans(int[] divisors, int k)
         {
             var set = new HashSet<string>();
