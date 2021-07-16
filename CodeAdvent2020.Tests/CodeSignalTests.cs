@@ -13,6 +13,23 @@ namespace CodeAdvent2020.Tests
 
 
         [Fact]
+        public void minNumOfCoinsTest1()
+        {
+            var coins = new int[] { 1, 2, 10 };
+            var price = 28;
+            Assert.Equal(6, Logic.minimalNumberOfCoins(coins, price));
+        }
+
+        [Fact]
+        public void minNumOfCoinsTest2()
+        {
+            var coins = new int[] { 1, 5,10,100 };
+            var price = 239;
+            Assert.Equal(10, Logic.minimalNumberOfCoins(coins, price));
+        }
+
+
+        [Fact]
         public void numOfClansTest()
         {
             Assert.Equal(4, Logic.numberOfClans(new int[] { 2, 3 }, 6));

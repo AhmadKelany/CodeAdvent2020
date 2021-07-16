@@ -6,6 +6,26 @@ namespace CodeAdvent2020.Code.CodeSignal
 {
     public class Logic
     {
+        public static string[] addBorder(string[] picture)
+        {
+            string line = new string('*', picture[0].Length + 2);
+            var result = new List<string>() { line , line};
+            result.InsertRange(1, Enumerable.Range(0, picture.Length ).Select(i => $"*{picture[i]}*"));
+            return result.ToArray();
+}
+
+        public static int minimalNumberOfCoins(int[] coins, int price)
+        {
+            var num = 0;
+            int index = coins.Length - 1;
+            while (price > 0)
+            {
+                num += Math.DivRem(price, coins[index], out price);
+                index--;
+            }
+            
+            return num;
+        }
 
         public static String LongestConsec(string[] strarr, int k)
         {
@@ -51,51 +71,6 @@ namespace CodeAdvent2020.Code.CodeSignal
                 set.Add(s);
             }
             return set.Count;
-            //var nums = Enumerable.Range(1,k).ToList();
-            //var clan1 = nums.Where(n => divisors.All(d => n%d == 0));
-            //var clan2 = nums.Where(n => divisors.All(d => n%d != 0));
-            //var clan3 = nums.Except(clan1).Except(clan2);
-            //return clan3.Count() + (clan2.Any() ? 1 : 0) + (clan1.Any() ? 1 : 0);
-            //var count = 0;
-            //while (nums.Count > 0)
-            //{
-            //    if (nums.Count == 1)
-            //    {
-            //        count++;
-            //        nums.Clear();
-            //        continue;
-            //    }
-
-            //    //var tange = nums.Where(n => )
-
-            //    int a = nums.First();
-            //    var rest = nums.Skip(1).ToList();
-            //    bool found = false;
-            //    foreach (int  b in rest)
-            //    {
-            //        if (divisors.All(d => (a % d == 0) == (b % d == 0)))
-            //        {
-            //            nums.Remove(a);
-            //            nums.Remove(b);
-            //            count++;
-            //            found = true;   
-            //            break;
-            //        }
-            //    }
-            //    if (!found)
-            //    {
-            //        nums.Remove(a);
-            //        count++;
-            //    }
-            //}
-
-            //return count;
-            //var q = from a in Enumerable.Range(1, k)
-            //        from b in Enumerable.Range(1, k)
-            //        where a<b && a != b && divisors.All(d => (a%d == 0) == (b%d == 0))
-            //        select (a, b);
-            //var u = Enumerable.Range(1, k).Where(d => q.All(x => x.a != d && x.b != d));
-            //return q.Count() + u.Count();
         }
 
         public static int numbersGrouping(int[] a)
