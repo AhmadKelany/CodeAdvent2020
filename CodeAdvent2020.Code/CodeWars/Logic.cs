@@ -11,28 +11,39 @@ namespace CodeAdvent.Code.CodeWars
         public static string Extract(int[] args)
         {
             string result = "";
-            string range = "";
-            for (int i = 1; i < args.Length; i++)
+            int index = 0;
+            while (index < args.Length)
             {
-                if (args[i] - args[i-1] == 1)
+                int lastIndex = index + 1;
+                int firstInRange = args[index];
+                List<int> range = new List<int> { firstInRange };               
+                while (lastIndex < args.Length)
                 {
-                    if (range == "")
+                    if (args[lastIndex] - args[lastIndex-1] == 1)
                     {
-                        range = $"{args[i - 1]}-";
+                        range.Add(args[lastIndex]);
+                        lastIndex++;
+                    }
+                    else
+                    {
+                        index = lastIndex;
+                        break;
+                    }
+                }
+                if (range.Count<3)
+                {
+                    foreach (var item in range)
+                    {
+                        result += $"{item},";
                     }
                 }
                 else
                 {
-                    if (range == "")
-                    {
-                        result += $"{args[i - 1]},";
-                    }
-                    else
-                    {
-
-                    }
+                    result += $"{range.First()}-{range.Last()},";
                 }
+                index = Array.IndexOf(args,range.Last()) + 1;
             }
+            return result.Trim(',');
         }
     }
 }
