@@ -11,6 +11,11 @@ namespace CodeAdvent.Code.CodeWars
     {
         public static string StripComments(string text, string[] commentSymbols)
         {
+            for(int i = 0; i < commentSymbols.Length; i++)
+            {
+                commentSymbols[i] = commentSymbols[i].Replace("$", "×");
+            }
+            text = text.Replace("$", "×");
             string pattern = $" +({string.Join(@"|" , commentSymbols)})[ |\\w]+";
             var matches = Regex.Matches(text, pattern);
             foreach (var match in matches)
