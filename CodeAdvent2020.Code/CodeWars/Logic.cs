@@ -17,7 +17,7 @@ namespace CodeAdvent.Code.CodeWars
                 commentSymbols[i] = commentSymbols[i].Replace("$", "×");
             }
             text = text.Replace("$", "×");
-            string mainPattern = $" +({string.Join(@"|" , commentSymbols)})[ |\\w]+";
+            string mainPattern = $" *({string.Join(@"|" , commentSymbols)})[ |\\w]+";
             string spacesAtEndPattern = " +\n";
             var matches2 = Regex.Matches(text, spacesAtEndPattern);
             foreach (var m in matches2)
