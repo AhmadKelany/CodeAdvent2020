@@ -11,13 +11,20 @@ namespace CodeAdvent.Code.CodeWars
     {
         public static string StripComments(string text, string[] commentSymbols)
         {
+            text = text.Trim();
             for(int i = 0; i < commentSymbols.Length; i++)
             {
                 commentSymbols[i] = commentSymbols[i].Replace("$", "×");
             }
             text = text.Replace("$", "×");
-            string pattern = $" +({string.Join(@"|" , commentSymbols)})[ |\\w]+";
-            var matches = Regex.Matches(text, pattern);
+            string mainPattern = $" +({string.Join(@"|" , commentSymbols)})[ |\\w]+";
+            string spacesAtEndPattern = " +\n";
+            var matches2 = Regex.Matches(text, spacesAtEndPattern);
+            foreach (var m in matches2)
+            {
+                text = text.Replace(m.ToString(), "\n");
+            }
+            var matches = Regex.Matches(text, mainPattern);
             foreach (var match in matches)
             {
                 text = text.Replace(match.ToString(), "");
