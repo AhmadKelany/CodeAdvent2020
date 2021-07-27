@@ -29,6 +29,11 @@ namespace CodeAdvent.Code.CodeWars
             {
                 text = text.Replace(match.ToString(), "");
             }
+            foreach (var s in commentSymbols)
+            {
+                text = text.Replace(s, "");
+            }
+
             return text;
         }
 

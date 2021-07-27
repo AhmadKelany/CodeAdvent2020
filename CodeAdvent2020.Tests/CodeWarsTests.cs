@@ -26,5 +26,23 @@ namespace CodeAdvent.Tests
             var input = "a \n b \nc ";
             Assert.Equal(expected, Logic.StripComments(input, symbols));
         }
+        
+        [Fact]
+        public void minNumOfCoinsTest3()
+        {
+            var symbols = new string[] { "a"};
+            var expected = string.Empty;
+            var input = "a";
+            Assert.Equal(expected, Logic.StripComments(input, symbols));
+        }
+        
+        [Fact]
+        public void minNumOfCoinsTest4()
+        {
+            var symbols = new string[] { "#"};
+            var expected = string.Empty;
+            var input = "# some text";
+            Assert.Equal(expected, Logic.StripComments(input, symbols));
+        }
     }
 }
