@@ -11,30 +11,22 @@ namespace CodeAdvent.Code.CodeWars
     {
         public static string StripComments(string text, string[] commentSymbols)
         {
-            text = text.Trim();
-            for(int i = 0; i < commentSymbols.Length; i++)
+            var lines = text.Split('\n');
+            for(int s = 0;s<commentSymbols.Length;s++)
             {
-                commentSymbols[i] = commentSymbols[i].Replace("$", "×");
-            }
-            text = text.Replace("$", "×");
-            string mainPattern = $" *({string.Join(@"|" , commentSymbols)})[ |\\w]+";
-            string spacesAtEndPattern = " +\n";
-            var matches2 = Regex.Matches(text, spacesAtEndPattern);
-            foreach (var m in matches2)
-            {
-                text = text.Replace(m.ToString(), "\n");
-            }
-            var matches = Regex.Matches(text, mainPattern);
-            foreach (var match in matches)
-            {
-                text = text.Replace(match.ToString(), "");
-            }
-            foreach (var s in commentSymbols)
-            {
-                text = text.Replace(s, "");
+                for (int l = 0; l < lines.Length; l++)
+                {
+                    int symbolIndex = lines[l].IndexOf(commentSymbols[s]);
+                    if (symbolIndex > -1)
+                    {
+                        lines[l] = lines[l].Substring(0,symbolIndex);
+                    }
+                    lines[l] = lines[l].TrimEnd();
+                }
             }
 
-            return text;
+            return string.Join("\n",lines);
+
         }
 
         public static string Extract(int[] args)

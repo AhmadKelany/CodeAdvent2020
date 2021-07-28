@@ -44,5 +44,13 @@ namespace CodeAdvent.Tests
             var input = "# some text";
             Assert.Equal(expected, Logic.StripComments(input, symbols));
         }
+        [Fact]
+        public void minNumOfCoinsTest5()
+        {
+            var symbols = new string[] { "#","$","!", "-"};
+            var expected = "DAEE\nCAF\n\nDF\n\nCB\n\n\n\nB\n\nB";
+            var input = "DAEE\nCAF\n\nDF\n\nCB\n\n#CA\n\nB\n\nB";
+            Assert.Equal(expected, Logic.StripComments(input, symbols));
+        }
     }
 }
