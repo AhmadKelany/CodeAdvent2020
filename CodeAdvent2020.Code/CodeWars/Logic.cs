@@ -9,7 +9,16 @@ namespace CodeAdvent.Code.CodeWars
 {
     public class Logic
     {
-        public static string StripComments(string text, string[] commentSymbols)
+        public class Creature
+        {
+            static Dictionary<string, object> properties = new Dictionary<string, object>();
+            public object this[string index]
+            {
+                get => properties[index];
+                set => properties[index] = value;
+            }
+        }
+            public static string StripComments(string text, string[] commentSymbols)
         {
             var lines = text.Split('\n');
             for(int s = 0;s<commentSymbols.Length;s++)
