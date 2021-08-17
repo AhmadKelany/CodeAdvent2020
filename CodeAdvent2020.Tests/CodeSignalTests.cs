@@ -11,6 +11,34 @@ namespace CodeAdvent2020.Tests
     public class CodeSignalTests
     {
 
+        [Fact]
+        public void SwitchLightsTest1()
+        {
+            var input = new int[] { 1, 1, 1, 1, 1 };
+            var expected = new int[] { 0, 1, 0, 1, 0 };
+            Assert.Equal(expected, Logic.switchLights(input));
+        }
+        [Fact]
+        public void SwitchLightsTest2()
+        {
+            var input = new int[] { 0, 0 };
+            var expected = new int[] { 0, 0 };
+            Assert.Equal(expected, Logic.switchLights(input));
+        }
+        [Fact]
+        public void SwitchLightsTest3()
+        {
+            var input = new int[] { 1, 0, 0, 1, 0, 1, 0, 1 };
+            var expected = new int[] { 1, 1, 1, 0, 0, 1, 1, 0 };
+            Assert.Equal(expected, Logic.switchLights(input));
+        }
+        [Fact]
+        public void SwitchLightsTest4()
+        {
+            var input = new int[] { 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1 };
+            var expected = new int[] { 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0 };
+            Assert.Equal(expected, Logic.switchLights(input));
+        }
 
         [Fact]
         public void minNumOfCoinsTest1()

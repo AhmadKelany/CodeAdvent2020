@@ -6,13 +6,31 @@ namespace CodeAdvent2020.Code.CodeSignal
 {
     public class Logic
     {
+
+
+        public static int[] switchLights(int[] a)
+        {
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i] == 1)
+                {
+                    for (int j = 0; j <= i; j++)
+                    {
+                        a[j] = a[j] == 0 ? 1 : 0;
+                    }
+                }
+
+            }
+            return a;
+        }
+
         public static string[] addBorder(string[] picture)
         {
             string line = new string('*', picture[0].Length + 2);
-            var result = new List<string>() { line , line};
-            result.InsertRange(1, Enumerable.Range(0, picture.Length ).Select(i => $"*{picture[i]}*"));
+            var result = new List<string>() { line, line };
+            result.InsertRange(1, Enumerable.Range(0, picture.Length).Select(i => $"*{picture[i]}*"));
             return result.ToArray();
-}
+        }
 
         public static int minimalNumberOfCoins(int[] coins, int price)
         {
@@ -23,7 +41,7 @@ namespace CodeAdvent2020.Code.CodeSignal
                 num += Math.DivRem(price, coins[index], out price);
                 index--;
             }
-            
+
             return num;
         }
 
@@ -32,8 +50,8 @@ namespace CodeAdvent2020.Code.CodeSignal
             string longest = "";
             for (int i = 0; i < strarr.Length - k + 1; i++)
             {
-                var current = strarr.Skip(i).Take(k).Aggregate("", (x,y) => x+y);
-                if(current.Length > longest.Length)
+                var current = strarr.Skip(i).Take(k).Aggregate("", (x, y) => x + y);
+                if (current.Length > longest.Length)
                 {
                     longest = current;
                 }
@@ -45,9 +63,9 @@ namespace CodeAdvent2020.Code.CodeSignal
         {
             if (arr.All(n => n < 0)) return 0;
             if (arr.All(n => n >= 0)) return arr.Sum();
-            var sums = new List<int>(); 
+            var sums = new List<int>();
             var positiveIndexes = arr.Select((n, i) => n > 0 ? i : -1).Where(n => n >= 0);
-            if(positiveIndexes.Count() == 1) return positiveIndexes.First();
+            if (positiveIndexes.Count() == 1) return positiveIndexes.First();
             foreach (int posIndex in positiveIndexes)
             {
                 foreach (var nextIndex in positiveIndexes.Where(i => i > posIndex))
@@ -75,7 +93,7 @@ namespace CodeAdvent2020.Code.CodeSignal
 
         public static int numbersGrouping(int[] a)
         {
-            var groups = a.GroupBy(i =>   (i-1)/10_000 );
+            var groups = a.GroupBy(i => (i - 1) / 10_000);
             return a.Count() + groups.Count();
         }
 
@@ -95,16 +113,16 @@ namespace CodeAdvent2020.Code.CodeSignal
 
         public static int constructSquare(string s)
         {
-            int minSquare = (int)Math.Pow(10,s.Length-1);
-            int maxSquare = (int)Math.Pow(10, s.Length ) - 1;
+            int minSquare = (int)Math.Pow(10, s.Length - 1);
+            int maxSquare = (int)Math.Pow(10, s.Length) - 1;
             int minNum = (int)Math.Sqrt(minSquare);
             int maxNum = (int)Math.Sqrt(maxSquare);
             for (int i = maxNum; i >= minNum; i--)
             {
-                int sqr =(int)Math.Pow(i, 2);
+                int sqr = (int)Math.Pow(i, 2);
                 string sqrString = $"{sqr}";
-                var sCounts = s.GroupBy(c => c).Select(g => g.Count()).OrderBy(x => x).Aggregate("" ,(s , x) => s + $"{x}");
-                var sqrCounts = sqrString.GroupBy(c => c).Select(g => g.Count()).OrderBy(x => x).Aggregate("" ,(s , x) => s + $"{x}");
+                var sCounts = s.GroupBy(c => c).Select(g => g.Count()).OrderBy(x => x).Aggregate("", (s, x) => s + $"{x}");
+                var sqrCounts = sqrString.GroupBy(c => c).Select(g => g.Count()).OrderBy(x => x).Aggregate("", (s, x) => s + $"{x}");
                 if (sqrCounts == sCounts)
                 {
                     return sqr;
@@ -150,15 +168,15 @@ namespace CodeAdvent2020.Code.CodeSignal
                     break;
                 }
             }
-            if(index == -1)
+            if (index == -1)
             {
                 return false;
             }
             else
             {
-                return f1[index] < f2[index] ? string.Compare(f1,f2) > 0 : string.Compare(f2, f1) > 0;
+                return f1[index] < f2[index] ? string.Compare(f1, f2) > 0 : string.Compare(f2, f1) > 0;
             }
-            
+
         }
 
         public static int candles(int candlesNumber, int makeNew)
@@ -171,7 +189,7 @@ namespace CodeAdvent2020.Code.CodeSignal
                 leftCount += candlesNumber;
                 candlesNumber = leftCount / makeNew;
                 leftCount -= candlesNumber * makeNew;
-            } while (candlesNumber > 0 );
+            } while (candlesNumber > 0);
 
             return burnCount;
         }
@@ -201,30 +219,30 @@ namespace CodeAdvent2020.Code.CodeSignal
 
             return formations;
         }
-        public static int GetPossibleFormations(string h1 , string h2 , string v1 , string v2)
+        public static int GetPossibleFormations(string h1, string h2, string v1, string v2)
         {
             var formations = 0;
-            for(int ih1 = 0; ih1 < h1.Length; ih1++) 
+            for (int ih1 = 0; ih1 < h1.Length; ih1++)
             {
-                for(int iv1 = 0; iv1 < v1.Length; iv1++)
+                for (int iv1 = 0; iv1 < v1.Length; iv1++)
                 {
                     if (h1[ih1] == v1[iv1])
                     {
-                        for (int i2v1 = iv1+2; i2v1 < v1.Length; i2v1++)
+                        for (int i2v1 = iv1 + 2; i2v1 < v1.Length; i2v1++)
                         {
                             for (int ih2 = 0; ih2 < h2.Length; ih2++)
                             {
                                 if (v1[i2v1] == h2[ih2])
                                 {
                                     int height = i2v1 - iv1;
-                                    for (int i2h2 = ih2  +2 ; i2h2 < h2.Length; i2h2++)
+                                    for (int i2h2 = ih2 + 2; i2h2 < h2.Length; i2h2++)
                                     {
-                                        for (int iv2 = v2.Length-1; iv2  >= height; iv2 --)
+                                        for (int iv2 = v2.Length - 1; iv2 >= height; iv2--)
                                         {
-                                            if (h2[i2h2] == v2[iv2] )
+                                            if (h2[i2h2] == v2[iv2])
                                             {
                                                 int width = i2h2 - ih2;
-                                                if (ih1+width < h1.Length && h1[ih1+width] == v2[iv2-height] )
+                                                if (ih1 + width < h1.Length && h1[ih1 + width] == v2[iv2 - height])
                                                 {
                                                     formations++;
                                                 }
