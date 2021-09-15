@@ -7,6 +7,14 @@ namespace CodeAdvent2020.Code.CodeSignal
     public class Logic
     {
 
+        public static int electionsWinners(int[] votes, int k)
+        {
+            int max = votes.Max();
+            int maxCount = votes.Count(v => v == max);
+            if (k == 0 && maxCount > 1) return 0;
+            if (k == 0 && maxCount == 1) return 1;
+            return votes.Count(v => v + k > max);
+        }
 
         public static int[] switchLights(int[] a)
         {
