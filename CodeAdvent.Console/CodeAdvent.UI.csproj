@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Spectre.Console" Version="0.41.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CodeAdvent2020.Code\CodeAdvent.Code.csproj" />
   </ItemGroup>
 
