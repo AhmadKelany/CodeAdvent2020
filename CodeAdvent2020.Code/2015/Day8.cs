@@ -21,11 +21,17 @@ namespace CodeAdvent.Code._2015
             int memoryLength = s.Length;
             return (codeLength,memoryLength);
         }
+        public static string GetInMemoryString(string s)
+        {
+            s = s.Replace("\\\"", "i");
+            s = Regex.Replace(s, @"\\x[0-9]{2}", "i");
+            s = s.Replace("\\\\", "i");
+            return s;
+        }
         public static void Part1()
         {
             var result = GetInput()
-                .Select(GetStringLengths)
-                .Sum(x => x.codeLength - x.memoryLength);
+                .Sum(x => x.Length + 2  - GetInMemoryString(x).Length);
             Screen.WriteLine($"Part 1 result = {result}" , ConsoleColor.Cyan);
         }
     }

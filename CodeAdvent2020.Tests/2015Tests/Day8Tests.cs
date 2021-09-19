@@ -10,17 +10,17 @@ namespace CodeAdvent.Tests._2015Tests
 {
     public class Day8Tests
     {
-        [Theory]
-        [InlineData("", 2, 0)]
-        [InlineData("abc", 5, 3)]
-        [InlineData("aaa\"aaa", 10, 7)]
-        [InlineData("\x27", 6, 1)]
-        public void GetStringLengthsTest(string s, int expectedCodeLength, int expectedMemoryLength)
-        {
-            var lengths = Day8.GetStringLengths(s);
-            Assert.Equal(expectedMemoryLength, lengths.memoryLength);
+        //[Theory]
+        //[InlineData("", "")]
+        //[InlineData("abc", "abc")]
+        //[InlineData("aaa\"aaa", "aaaiaaa")]
+        //[InlineData("\x27","i")]
+        //public void GetStringLengthsTest(string s, string expected)
+        //{
+        //    var lengths = Day8.GetStringLengths(s);
+        //    Assert.Equal(expectedMemoryLength, lengths.memoryLength);
 
-            Assert.Equal(expectedCodeLength , lengths.codeLength);
-        }
+        //    Assert.Equal(expectedCodeLength , lengths.codeLength);
+        //}
     }
 }
