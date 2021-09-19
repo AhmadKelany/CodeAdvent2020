@@ -60,9 +60,6 @@ namespace CodeAdvent.Code._2015
                 default:
                     break;
             }
-
-
-
             return new Action(command, otherKey1, otherKey2, o1, o2, key);
         }
 
@@ -77,7 +74,6 @@ namespace CodeAdvent.Code._2015
                 key = input;
                 operand = -1;
             }
-
         }
         public static void ApplyAction(Action action)
         {
@@ -106,7 +102,6 @@ namespace CodeAdvent.Code._2015
             var result = ProcessActions(allActions);
             Screen.WriteLine($"Part 2 result = {result}" , ConsoleColor.Cyan);
             return result;
-
         }
 
         private static int ProcessActions(List<Action> allActions)
