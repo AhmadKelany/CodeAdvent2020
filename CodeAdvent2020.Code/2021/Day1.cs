@@ -24,11 +24,13 @@ namespace CodeAdvent.Code._2021
         public static int Part2()
         {
             var data = GetData();
-            var firstSequence = data.Zip(data.Skip(1)).Zip(data.Skip(2));
-            var secondSequence = data.Skip(3).Zip(data.Skip(4)).Zip(data.Skip(5));
-            var result = firstSequence.Zip(secondSequence).Count(x => x.First.First.First + x.First.First.Second + x.First.Second  < x.Second.First.First + x.Second.First.Second + x.Second.Second);
-            Screen.WriteLine($"result = {result}", ConsoleColor.Green);
-            return result;
+            int count = 0;
+            for (int i = 0; i < data.Count - 3; i++)
+            {
+                count += data[i] < data[i + 3] ? 1 : 0;
+            }
+            Screen.WriteLine($"result = {count}", ConsoleColor.Green);
+            return count;
 
         }
     }
