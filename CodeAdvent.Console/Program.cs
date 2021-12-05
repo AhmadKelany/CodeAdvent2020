@@ -23,7 +23,7 @@ namespace CodeAdvent.UI
             try
             {
                 var s = input.Split(".");
-                var a = Assembly.GetAssembly(typeof(CodeAdvent.Code._2015.Day1));
+                var a = Assembly.GetAssembly(typeof(CodeAdvent.Code._2021.Day1));
                 var n = $"CodeAdvent.Code._{s[0]}.Day{s[1]}";
                 var type = a.GetType(n);
                 var m = type.GetMethod($"Part{s[2]}");
