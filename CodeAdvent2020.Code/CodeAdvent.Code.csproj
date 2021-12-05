@@ -1,12 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <LangVersion>9</LangVersion>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>Latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="2020\InputFiles\" />
+    <Folder Include="2021\InputFiles\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -73,6 +74,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="2020\InputFiles\Day9.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="2021\InputFiles\Day1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
