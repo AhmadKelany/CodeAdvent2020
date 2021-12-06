@@ -34,5 +34,34 @@ namespace CodeAdvent.Code._2021
 
             return result;
         }
+        public static int Part2()
+        {
+            var data = GetData();
+            int aim = 0;
+            int x = 0;
+            int y = 0;
+            foreach (var command in data)
+            {
+                switch (command.Instruction)
+                {
+                    case "forward":
+                        x += command.Amount;
+                        y += (aim*command.Amount);
+                        break;
+                    case "up":
+                        aim -= command.Amount;
+                        break ;
+                    case "down":
+                        aim += command.Amount;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            int result = x * y;
+            Screen.WriteLine($"result = {result}", ConsoleColor.Green);
+            return result;
+
+        }
     }
 }
