@@ -14,7 +14,7 @@ namespace CodeAdvent.Code._2021
 
         public static int Part1()
         {
-
+            return 0;
         }
     }
 }
