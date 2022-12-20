@@ -16,27 +16,38 @@ public class Day1
 
     public static int Part1()
     {
+
         var d = GetData().AsSpan<string>();
-        int max = 0;
-        int elfTotal = 0;
-        int i = 0;
-        while (i < d.Length)
-        {
-            int.TryParse(d[i], out int item);
-            elfTotal += item;
-            if (d[i] == "" || i == d.Length -1)
-            {
-                max = Math.Max(max, elfTotal);
-                elfTotal = 0;
-            }
-            i++;
-        }
+        int max = GetTopElfTotals(d, 1)[0];
         Screen.WriteLine($"result = {max}", ConsoleColor.Green);
         return max;
     }
 
+    public static int[] GetTopElfTotals(Span<string> values , int count)
+    {
+        HashSet<int> result = new HashSet<int>();
+        
+        int elfTotal = 0;
+        int i = 0;
+        while (i < values.Length)
+        {
+            int.TryParse(values[i], out int item);
+            elfTotal += item;
+            if (values[i] == "" || i == values.Length - 1)
+            {
+                result.Add(elfTotal);
+                elfTotal = 0;
+            }
+            i++;
+        }
+        return result.OrderByDescending(n => n).Take(count).ToArray();
+    }
+
     public static int Part2()
     {
-        return 0;
+        var d = GetData().AsSpan<string>();
+        int max = GetTopElfTotals(d, 3).Sum();
+        Screen.WriteLine($"result = {max}", ConsoleColor.Green);
+        return max; ;
     }
 }
