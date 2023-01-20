@@ -53,7 +53,10 @@ public class CrackCode
         result[firstNumber.Number] = firstNumber.RightPosition;
         var secondNumber = numberPositionsInfos.First(n => n.WrongPositions.Count == 2);
         result[secondNumber.Number] = positions.Except(secondNumber.WrongPositions).Single();
-        foreach (var c in clues.Where(c => c.CorrectNumberCount == 1 && c.CorrectPlaceCount == 0 && (c.Numbers.Contains(firstNumber.Number) || c.Numbers.Contains(secondNumber.Number))))
+        foreach (var c in clues.
+            Where(c => c.CorrectNumberCount == 1 &&
+                               c.CorrectPlaceCount == 0 && 
+                               (c.Numbers.Contains(firstNumber.Number) || c.Numbers.Contains(secondNumber.Number))))
         {
             var ns = c.Numbers.Where(n => n != firstNumber.Number && n != secondNumber.Number);
             foreach (var w in ns)
@@ -65,7 +68,10 @@ public class CrackCode
         positions.Remove(result[secondNumber.Number]);
         numberPositionsInfos.Remove(firstNumber);
         numberPositionsInfos.Remove(secondNumber);
-        var thirdNumber = numberPositionsInfos.Where(n => !wrongNumbers.Contains(n.Number) && n.WrongPositions.Intersect(positions).Count() == 0).First();
+        var thirdNumber = numberPositionsInfos.
+            Where(n => !wrongNumbers.Contains(n.Number) &&
+                                            n.WrongPositions.Intersect(positions).Count() == 0).
+                                            First();
         result[thirdNumber.Number] = positions[0];
         return string.Concat( result.OrderBy(d => d.Value).ToDictionary(d => d.Key, d => d.Value).Select(d => d.Key)) ;
     }
