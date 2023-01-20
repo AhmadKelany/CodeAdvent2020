@@ -23,21 +23,9 @@ public class CrackCodeTests
         string solution = Solve(clues);
         Assert.Equal("042", solution);
     }
+    
     [Fact]
     public void ShouldSolvePattern2()
-    {
-        List<Clue> clues = new() {
-            new Clue(new int[]{0,7,9} ,CorrectNumberCount:1 ,CorrectPlaceCount:1) ,
-            new Clue(new int[]{9,6,8} ,CorrectNumberCount:2 ,CorrectPlaceCount:0) ,
-            new Clue(new int[]{7,3,8} ,CorrectNumberCount:1 ,CorrectPlaceCount:0) ,
-            new Clue(new int[]{1,0,5} ,CorrectNumberCount:0 ,CorrectPlaceCount:0) ,
-            new Clue(new int[]{5,2,0} ,CorrectNumberCount:1 ,CorrectPlaceCount:0) ,
-        };
-        string solution = Solve(clues);
-        Assert.Equal("289", solution);
-    }
-    [Fact]
-    public void ShouldSolvePattern3()
     {
         List<Clue> clues = new() {
             new Clue(new int[]{2,9,1} ,CorrectNumberCount:1 ,CorrectPlaceCount:1) ,

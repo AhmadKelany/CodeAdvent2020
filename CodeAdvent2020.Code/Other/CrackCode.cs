@@ -14,17 +14,16 @@ public class CrackCode
     public static string Solve(List<Clue> clues)
     {
         Dictionary<int, int> result = new();
-        List<int> wrongNumbers = clues.
-        First(c => c.CorrectNumberCount == 0 && c.CorrectPlaceCount == 0).
-        Numbers.ToList();
-        clues = clues.Where(c => c.CorrectNumberCount > 0 || c.CorrectPlaceCount > 0).ToList();
+        Clue allWrongClue = clues.First(c => c.CorrectNumberCount == 0 && c.CorrectPlaceCount == 0);
+        HashSet<int> wrongNumbers = allWrongClue.Numbers.ToHashSet();
+        clues.Remove(allWrongClue);
         List<int> positions = new() { 0, 1, 2 };
-        List<NumberPositions> numberIndixes = new();
+        List<NumberPositions> numberPositionsInfos = new();
         List<int> uniqueNumbers = clues.SelectMany(c => c.Numbers).Where(n => !wrongNumbers.Contains(n)).Distinct().ToList();
         foreach (int number in uniqueNumbers)
         {
             NumberPositions np = new NumberPositions { Number = number, RightPosition = -1 };
-            numberIndixes.Add(np);
+            numberPositionsInfos.Add(np);
             foreach (var clue in clues)
             {
 
@@ -44,16 +43,29 @@ public class CrackCode
 
 
         }
-        numberIndixes = numberIndixes.Where(n => !n.WrongPositions.Contains(n.RightPosition)).ToList();
-        var firstNumber = numberIndixes.First(n => n.RightPosition != -1);
+               
+        numberPositionsInfos = numberPositionsInfos.
+            Where(n =>   !n.WrongPositions.Contains(n.RightPosition) &&
+                                              !(n.WrongPositions.Count == 0)).
+            ToList();
+
+        var firstNumber = numberPositionsInfos.First(n =>  n.RightPosition != -1 && !wrongNumbers.Contains(n.Number));
         result[firstNumber.Number] = firstNumber.RightPosition;
-        var secondNumber = numberIndixes.First(n => n.WrongPositions.Count == 2);
+        var secondNumber = numberPositionsInfos.First(n => n.WrongPositions.Count == 2);
         result[secondNumber.Number] = positions.Except(secondNumber.WrongPositions).Single();
+        foreach (var c in clues.Where(c => c.CorrectNumberCount == 1 && c.CorrectPlaceCount == 0 && (c.Numbers.Contains(firstNumber.Number) || c.Numbers.Contains(secondNumber.Number))))
+        {
+            var ns = c.Numbers.Where(n => n != firstNumber.Number && n != secondNumber.Number);
+            foreach (var w in ns)
+            {
+                wrongNumbers.Add(w);
+            }
+        }
         positions.Remove(result[firstNumber.Number]);
         positions.Remove(result[secondNumber.Number]);
-        numberIndixes.Remove(firstNumber);
-        numberIndixes.Remove(secondNumber);
-        var thirdNumber = numberIndixes.Where(n => n.WrongPositions.Intersect(positions).Count() == 0).First();
+        numberPositionsInfos.Remove(firstNumber);
+        numberPositionsInfos.Remove(secondNumber);
+        var thirdNumber = numberPositionsInfos.Where(n => !wrongNumbers.Contains(n.Number) && n.WrongPositions.Intersect(positions).Count() == 0).First();
         result[thirdNumber.Number] = positions[0];
         return string.Concat( result.OrderBy(d => d.Value).ToDictionary(d => d.Key, d => d.Value).Select(d => d.Key)) ;
     }

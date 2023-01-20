@@ -10,6 +10,10 @@ namespace CodeAdvent.Code.Other
     {
         public int Number { get; set; }
         public int RightPosition { get; set; }
-        public List<int> WrongPositions { get; set; } = new();
+        public HashSet<int> WrongPositions { get; set; } = new();
+        public override string ToString()
+        {
+            return $"n={Number}, right={RightPosition}, wrong={string.Join(',',WrongPositions)}";
+        }
     }
 }
