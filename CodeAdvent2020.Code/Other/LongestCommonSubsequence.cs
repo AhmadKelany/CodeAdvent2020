@@ -16,18 +16,25 @@ public class LongestCommonSubsequence
 
     public static int[][] GetArray(string s1, string s2)
     {
-        int n = s1.Length + 1;
-        int m = s2.Length + 1;
+        
+        s1 = " " + s1;
+        s2 = " " + s2;
+        int n = s1.Length;
+        int m = s2.Length;
         int[][] a = new int[m][];
         for (int i = 0; i < m; i++)
         {
             a[i] = new int[n];
         }
-        for (int r = 1; r < m - 1; r++)
+        for (int r = 0; r < m ; r++)
         {
-            for (int c = 1; c < n - 1; c++)
+            for (int c = 0; c < n ; c++)
             {
-                if (s1[c] == s2[r])
+                if (r == 0 || c == 0)
+                {
+                    a[r][c] = 0;
+                }
+                else if (s1[c] == s2[r])
                 {
                     a[r][ c] = a[r - 1][ c - 1] + 1;
                 }
