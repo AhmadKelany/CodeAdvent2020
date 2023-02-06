@@ -11,7 +11,34 @@ public class LongestCommonSubsequence
     public static string GetLongestCommonSubsequence(string s1, string s2)
     {
         
-        return "lo";
+        int[][] a = GetArray(s1,s2);
+        int columnIndex = a[0].Length - 1;
+        int rowIndex = a.Length - 1;
+        string solution = "";
+        while (columnIndex > 0 && rowIndex > 0)
+        {
+            int current = a[rowIndex][columnIndex];
+            int left = a[rowIndex][columnIndex - 1];
+            int top = a[rowIndex - 1][columnIndex];
+            if (current > left)
+            {
+                if (current == top)
+                {
+                    rowIndex--;
+                    columnIndex--;
+                    continue;
+                }
+                else
+                {
+                    solution = $"{s1[columnIndex - 1]}{solution}";
+                    rowIndex--;
+                    columnIndex--;
+                    continue;
+                }
+            }
+            columnIndex--;
+        }
+        return solution;
     }
 
     public static int[][] GetArray(string s1, string s2)

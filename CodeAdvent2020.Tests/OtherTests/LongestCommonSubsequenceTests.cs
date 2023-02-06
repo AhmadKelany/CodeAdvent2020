@@ -10,9 +10,11 @@ namespace CodeAdvent.Tests.OtherTests;
 
 public class LongestCommonSubsequenceTests
 {
-    [Fact]
-    public void LCS()
+    [Theory]
+    [InlineData("helod" , "hello world" , "ohelod")]
+    [InlineData("elwrd" , "hello world" ,  "elwrd")]
+    public void LCS(string expected,string first , string second)
     {
-        Assert.Equal("helod", LongestCommonSubsequence.GetLongestCommonSubsequence("hello world", "ohelod"));
+        Assert.Equal(expected, LongestCommonSubsequence.GetLongestCommonSubsequence(first, second));
     }
 }
