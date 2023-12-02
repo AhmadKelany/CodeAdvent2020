@@ -8,6 +8,7 @@
   <ItemGroup>
     <Folder Include="2020\InputFiles\" />
     <Folder Include="2021\InputFiles\" />
+    <Folder Include="2023\InputFiles\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -92,6 +93,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="2022\InputFiles\Day1Sample.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="2023\InputFiles\Day1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -8,7 +8,7 @@ namespace CodeAdvent.UI
     {
         static void Main(string[] args)
         {
-            OtherCode.ShowLCSArray(); return;
+            //OtherCode.ShowLCSArray(); return;
             while(true)
             {
                 Screen.WriteLine("Please enter function data to solve,\nformat: yyyy.d.i\ne.g.: 2015.1.1 will display 2015 day 1 part 1",
