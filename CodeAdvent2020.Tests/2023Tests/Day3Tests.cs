@@ -1,4 +1,5 @@
-﻿using CodeAdvent.Code._2023;
+﻿using CodeAdvent.Code;
+using CodeAdvent.Code._2023;
 
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace CodeAdvent.Tests._2023Tests;
 
 public class Day3Tests
 {
-    static List<string> lines = ["467..114..", "...*......", "..35..633.", "......#...", "617*......", ".....+.58.", "..592.....", "......755.", "...$.*....", ".664.598.."];
+    static string[] sampleInput = Day.GetInput(typeof(Day3));
     [Fact]
     public void GetPartNumbersTest()
     {
