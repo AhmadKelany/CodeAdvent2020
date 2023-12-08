@@ -7,16 +7,21 @@ using System.Threading.Tasks;
 
 namespace CodeAdvent.Code;
 
-public abstract class Day
+public static class DayHelper
 {
     public static string GetInputPath(Type type)
     {
-        return $"{GetNamespaceYear(type)}/InputFiles/Day{GetClassNameDay(type)}.txt";
+        string year = GetNamespaceYear(type);
+        string day = GetClassNameDay(type);
+        return $"{year}/InputFiles/Day{day}.txt";
     }
 
     public static string GetSampleInputPath(Type type)
     {
-        return $"{GetNamespaceYear(type)}/InputFiles/Day{GetClassNameDay(type)}Sample.txt";
+        string year = GetNamespaceYear(type);
+        string day = GetClassNameDay(type);
+
+        return $"{year}/InputFiles/Day{day}Sample.txt";
     }
 
     public static string[] GetInput(Type type)

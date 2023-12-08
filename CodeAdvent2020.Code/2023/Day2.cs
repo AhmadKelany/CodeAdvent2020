@@ -20,6 +20,8 @@ public class Day2
         public List<Cubes> Cubes { get; set; }
     }
 
+
+
     public static bool IsValidGame(Game game, Cubes availableCubes)
     {
         bool isInvalid = game.
