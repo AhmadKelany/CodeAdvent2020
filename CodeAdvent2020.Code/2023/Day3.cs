@@ -15,8 +15,8 @@ public class Day3
 
     private static char[] separators = ['.', .. Symbols];
 
-    public record Point(int X , int Y);
-    public record PartNumber(int Number, int X , int[] Ys);
+    public record Point(int X, int Y);
+    public record PartNumber(int Number, int X, int[] Ys);
     public static List<PartNumber> GetPartNumbers(string[] lines)
     {
         List<PartNumber> parts = new();
@@ -44,30 +44,51 @@ public class Day3
         return foundIndexes.ToArray();
     }
 
-    public static Point[] GetPointsAdjacentToSymbols(string[] lines , char[] symbols)
+    public static Point[] GetSymbolPoints(string[] lines, char[] symbols)
     {
-        HashSet<Point> points = new HashSet<Point>();
-        for(int x = 0;x < lines.Length;x++)
+        List<Point> points = new();
+        for (int x = 0; x < lines.Length; x++)
         {
             string line = lines[x];
-
             var ys = GetSymbolIndexes(line, symbols);
-
             foreach (int y in ys)
             {
-                points.Add(new Point(x-1, y-1));
-                points.Add(new Point(x-1, y));
-                points.Add(new Point(x-1, y+1));
-                points.Add(new Point(x, y-1));
-                points.Add(new Point(x, y+1));
-                points.Add(new Point(x + 1, y - 1));
-                points.Add(new Point(x + 1, y));
-                points.Add(new Point(x + 1, y + 1));
+                points.Add(new Point(x, y));
+            }
+
+        }
+        return points.ToArray();
+    }
+
+
+    public static Point[] GetPointsAdjacentToSymbols(Point[] symbolPoints)
+    {
+        HashSet<Point> points = new HashSet<Point>();
+        foreach (var symbolPoint in symbolPoints)
+        {
+            var adjacentPoints = GetPointsAdjacentTo(symbolPoint);
+            foreach (Point point in adjacentPoints)
+            {
+                points.Add(point);
             }
         }
         return points.ToArray();
     }
-    public static bool PartInPoints(PartNumber part , Point[] points) 
+
+    public static Point[] GetPointsAdjacentTo(Point point)
+    {
+        List<Point> points = new List<Point>();
+        for (int x = point.X - 1; x <= point.X + 1; x++)
+        {
+            for (int y = point.Y - 1; y <= point.Y + 1; y++)
+            {
+                points.Add(new(x, y));
+            }
+        }
+        points.Remove(point);
+        return points.ToArray();
+    }
+    public static bool PartInPoints(PartNumber part, Point[] points)
     {
         return points.Any(p => p.X == part.X && part.Ys.Contains(p.Y));
     }
@@ -77,12 +98,39 @@ public class Day3
     {
         var lines = GetInput();
         var parts = GetPartNumbers(lines);
-        var symbolsAdjacentPoints = GetPointsAdjacentToSymbols(lines, Symbols.ToArray());
-        int result = parts.Where( p => PartInPoints(p, symbolsAdjacentPoints)).Sum(p => p.Number);
+        var symbolPoints = GetSymbolPoints(lines, Symbols.ToArray());
+        var symbolsAdjacentPoints = GetPointsAdjacentToSymbols(symbolPoints);
+        int result = parts.Where(p => PartInPoints(p, symbolsAdjacentPoints)).Sum(p => p.Number);
         Screen.WriteLine($"Part 1 Result = {result}", ConsoleColor.Green);
 
     }
-    private static List<PartNumber> GetLineParts( int x, string line)
+
+    public static void Part2()
+    {
+        var lines = GetInput();
+
+        var parts = Day3.GetPartNumbers(lines);
+        var symbolPoints = Day3.GetSymbolPoints(lines, @"*".ToArray());
+
+        int result = 0;
+        foreach (var point in symbolPoints)
+        {
+            var adjacentPoints = Day3.GetPointsAdjacentTo(point);
+            var adjacentParts = parts.Where(p => Day3.PartInPoints(p, adjacentPoints)).ToArray();
+
+            if (adjacentParts.Length == 2)
+            {
+                result += (adjacentParts.First().Number * adjacentParts.Last().Number);
+            }
+        }
+        Screen.WriteLine($"Part 2 Result = {result}", ConsoleColor.Green);
+
+    }
+
+
+
+
+    private static List<PartNumber> GetLineParts(int x, string line)
     {
         string[] numberStrings = line.Split(separators, StringSplitOptions.RemoveEmptyEntries);
         int currentIndex = 0;
