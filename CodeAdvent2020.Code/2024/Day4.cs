@@ -20,19 +20,42 @@ public static class Day4
         }
         return matrix;
     }
-    static void GetPossibleCount(int[][] matrix, int x,int y)
+    static int GetPossibleCount(char[][] matrix, int x,int y)
     {
         int count = 0;
-        int startX = x <= 3 ? 0 : x - 3;
-        int endX = x >= matrix[0].Length - 3 ? matrix[0].Length : x + 3;
-        int startY = y <= 3 ? 0 : y - 3;
-        int endY = y >= matrix.Length - 3 ? matrix.Length : y + 3;
-        for (int c = startX; c <= endX; c++)
+        for (int c = x < 3 ? x : x - 3; c <= (x >= matrix[0].Length -3 ? x : x + 3); c += 3)
         {
-            for(int r = startY; r <= endY; r++)
+            for(int r = y < 3 ? y : y - 3; r <=(y >= matrix.Length - 3 ? y : y + 3); r += 3)
             {
-                
+                if (matrix[r][c] == 'S')
+                {
+                    int xFactor = Math.Sign(r - x);
+                    int yFactor = Math.Sign(c - y);
+                    if (matrix[x + xFactor * 2][y+ yFactor * 2] == 'A' && matrix[x + xFactor ][y + yFactor ] == 'M')
+                    {
+                        count++;
+                    }
+                }
             }
         }
+        return count;
     }
+    public static void Part1()
+    {
+        string[] input = GetSampleInput();
+        char[][] matrix = GetMatrix(input);
+        int count = 0;
+        for (int i = 0; i < matrix.Length; i++)
+        {
+            for (int j = 0; j < matrix[i].Length; j++)
+            {
+                if (matrix[i][j] == 'X')
+                {
+                    count += GetPossibleCount(matrix, i, j);
+                }
+            }
+        }
+        Screen.WriteLine($"Part 1 Result = {count}", ConsoleColor.Cyan);
+    }
+
 }
