@@ -23,9 +23,15 @@ public static class Day4
     static int GetPossibleCount(char[][] matrix, int x,int y)
     {
         int count = 0;
-        for (int c = x < 3 ? x : x - 3; c <= (x >= matrix[0].Length -3 ? x : x + 3); c += 3)
+
+        int xStart = x < 3 ? x : x - 3;
+        int xEnd = x >= matrix[0].Length - 3 ? x : x + 3;
+
+        int yStart = y < 3 ? y : y - 3;
+        int yEnd = y >= matrix.Length - 3 ? y : y + 3;
+        for (int c = xStart; c <= xEnd; c += 3)
         {
-            for(int r = y < 3 ? y : y - 3; r <=(y >= matrix.Length - 3 ? y : y + 3); r += 3)
+            for(int r = yStart; r <= yEnd; r += 3)
             {
                 if (matrix[r][c] == 'S')
                 {
