@@ -20,6 +20,18 @@ public static class Day4
         }
         return matrix;
     }
+
+    static bool IsValidX(char[][] matrix, int x, int y)
+    {
+        char topLeft = matrix[y - 1][x - 1];
+        char topRight = matrix[y - 1][x + 1];
+        char bottomLeft = matrix[y + 1][x - 1];
+        char bottomRight = matrix[y + 1][x + 1];
+        char[] chars = new char[] { topLeft, topRight, bottomLeft, bottomRight };
+        if (chars.Any(c => c is 'X' or 'A')) return false;
+        return topLeft != bottomRight && topRight != bottomLeft;
+    }
+
     static int GetPossibleCount(char[][] matrix, int x,int y)
     {
         int count = 0;
@@ -50,24 +62,45 @@ public static class Day4
                 }
             }
         }
+
         return count;
     }
     public static void Part1()
     {
-        string[] input = GetSampleInput();
+        string[] input = GetInput();
         char[][] matrix = GetMatrix(input);
         int count = 0;
-        for (int i = 0; i < matrix.Length; i++)
+        for (int y = 0; y < matrix.Length; y++)
         {
-            for (int j = 0; j < matrix[i].Length; j++)
+            for (int x = 0; x < matrix[y].Length; x++)
             {
-                if (matrix[i][j] == 'X')
+                if (matrix[y][x] == 'X')
                 {
-                    count += GetPossibleCount(matrix, i, j);
+                    count += GetPossibleCount(matrix, x, y);
                 }
             }
         }
         Screen.WriteLine($"Part 1 Result = {count}", ConsoleColor.Cyan);
     }
 
+    public static void Part2()
+    {
+        string[] input = GetInput();
+        char[][] matrix = GetMatrix(input);
+        int count = 0;
+        for (int y = 1; y < matrix.Length-1; y++)
+        {
+            for (int x = 1; x < matrix[y].Length-1; x++)
+            {
+                if (matrix[y][x] == 'A')
+                {
+                    if (IsValidX(matrix, x, y))
+                    {
+                        count++;
+                    }
+                }
+            }
+        }
+        Screen.WriteLine($"Part 2 Result = {count}", ConsoleColor.Cyan);
+    }
 }
