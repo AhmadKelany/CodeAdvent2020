@@ -29,19 +29,21 @@ public static class Day4
 
         int yStart = y < 3 ? y : y - 3;
         int yEnd = y >= matrix.Length - 3 ? y : y + 3;
-        for (int c = xStart; c <= xEnd; c += 3)
+        for (int xc = xStart; xc <= xEnd; xc += 3)
         {
-            for(int r = yStart; r <= yEnd; r += 3)
+            for(int yr = yStart; yr <= yEnd; yr += 3)
             {
-                if (matrix[r][c] == 'S')
+                if (matrix[yr][xc] == 'S')
                 {
-                    int xFactor = Math.Sign(c - x);
-                    int yFactor = Math.Sign(r - y);
+                    int xFactor = Math.Sign(xc - x);
+                    int yFactor = Math.Sign(yr - y);
                     int ax = x + (xFactor * 2);
                     int ay = y + (yFactor * 2);
                     int mx = x + xFactor;
                     int my = y + yFactor;
-                    if (matrix[ay][ax] == 'A' && matrix[my][mx] == 'M')
+                    char achar = matrix[ay][ax];
+                    char mchar = matrix[my][mx];
+                    if (achar == 'A' && mchar == 'M')
                     {
                         count++;
                     }
