@@ -35,9 +35,13 @@ public static class Day4
             {
                 if (matrix[r][c] == 'S')
                 {
-                    int xFactor = Math.Sign(r - x);
-                    int yFactor = Math.Sign(c - y);
-                    if (matrix[x + xFactor * 2][y+ yFactor * 2] == 'A' && matrix[x + xFactor ][y + yFactor ] == 'M')
+                    int xFactor = Math.Sign(c - x);
+                    int yFactor = Math.Sign(r - y);
+                    int ax = x + (xFactor * 2);
+                    int ay = y + (yFactor * 2);
+                    int mx = x + xFactor;
+                    int my = y + yFactor;
+                    if (matrix[ay][ax] == 'A' && matrix[my][mx] == 'M')
                     {
                         count++;
                     }
